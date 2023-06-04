@@ -10,7 +10,7 @@ const RootLayout = () => {
         <img
           src={bgPhoto}
           alt="background-photo"
-          className="max-h-96 w-full blur-sm"
+          className="max-h-96 w-full blur-sm border-b-2 border-gray-600"
         />
         <MainNavigation />
       </div>

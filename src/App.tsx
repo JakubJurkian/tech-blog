@@ -6,9 +6,6 @@ import PostPage from "./pages/Post";
 import AuthPage from "./pages/Auth";
 import RootLayout from "./pages/Root";
 
-import './App.css';
-
-
 const router = createBrowserRouter([
   {
     path: "/",
