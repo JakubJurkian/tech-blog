@@ -1,24 +1,24 @@
 import classes from './AuthorCard.module.css';
 
-function AuthorCard(props: { author: string; description: string, src: string }) {
+function AuthorCard(props: { author: string; description: string, src: string, githubLink: string }) {
   return (
     <div
-      className={`${classes['bg-card']} flex py-4 px-3 xxs:px-5 xs:p-5 xxs:bottom-20 xs:bottom-28 sm:bottom-36 sm:px-8 md:w-4/5 max-w-lg m-auto rounded-xl shadow-md relative bottom-16`}
+      className={`${classes['bg-card']} flex py-4 px-3 xxs:px-5 xs:p-5 xxs:bottom-20 xs:bottom-28 sm:bottom-36 sm:px-8 md:w-4/5 max-w-lg s:m-auto mx-2 rounded-xl shadow-md relative bottom-16`}
     >
       <img
         src={props.src}
         alt="author"
         width="148"
-        className="rounded-lg mr-6 xxs:mr-8 xs:w-40 sm:w-44"
+        className="self-center rounded-lg mr-6 xs:w-40 sm:w-44 min-w-[152px] max-h-[148px]"
       />
       <div className="text-center w-full">
         <h2 className="text-xl xs:text-2xl ">{props.author}</h2>
         <a
           target="_blank"
-          href="https://github.com/JakubJurkian"
-          className="text-blue-500 font-medium text-xs hover:underline my-4 align-middle"
+          href={props.githubLink}
+          className="text-blue-500 font-medium text-xs my-4 align-middle"
         >
-          <p className="inline-block text-sm">GITHUB</p>
+          <p className="inline-block text-sm hover:underline">GITHUB</p>
           <br />
           <img
             src="./github-logo.svg"
