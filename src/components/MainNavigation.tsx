@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Menu from './Menu.tsx';
 
 import classes from './MainNavigation.module.css';
+import { NavLink } from 'react-router-dom';
 
 function App() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
@@ -15,7 +16,9 @@ function App() {
       <nav className="shadow-xl">
         <div className="max-w-7xl mx-auto flex items-center justify-between h-16 px-4">
           <div className="flex-shrink-0 font-bold tracking-wider">
-            <img src="./home-24.svg" alt="home" />
+            <NavLink to="/" className={classes['filter-white']}>
+              <img src="./home-34.svg" alt="home" />
+            </NavLink>
           </div>
           <div className="hidden md:block">
             <Menu onClickedElement={isElementClicked} />

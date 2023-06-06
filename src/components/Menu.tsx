@@ -8,8 +8,8 @@ const Menu = (props: { onClickedElement(arg: boolean): void }) => {
   return (
     <ul className=" px-2 md:px-0 py-3 space-y-2 md:space-y-0 md:space-x-2 font-medium text-slate-700 md:flex">
       <li>
-        <NavLink to="/" className="menu-el" onClick={clickHandler}>
-          Home
+        <NavLink to="/auth" className="menu-el" onClick={clickHandler}>
+          About me
         </NavLink>
       </li>
       <li>
