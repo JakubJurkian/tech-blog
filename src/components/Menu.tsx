@@ -1,12 +1,13 @@
 import { NavLink } from 'react-router-dom';
 
 const Menu = (props: { onClickedElement(arg: boolean): void }) => {
+  
   function clickHandler() {
     props.onClickedElement(true);
   }
 
   return (
-    <ul className=" px-2 md:px-0 py-3 space-y-2 md:space-y-0 md:space-x-2 font-medium text-slate-700 md:flex">
+    <ul className="py-2 space-y-3 font-medium text-slate-700 md:flex md:space-y-0 md:space-x-2">
       <li>
         <NavLink to="/auth" className="menu-el" onClick={clickHandler}>
           About me

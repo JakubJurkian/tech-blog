@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import ErrorPage from "./pages/Error";
 import HomePage from "./pages/Home";
-import PostPage from "./pages/Post";
+import EditPostPage from "./pages/Post";
 import NewPostPage from "./pages/NewPost";
 import AuthPage from "./pages/Auth";
 import RootLayout from "./pages/Root";
@@ -15,7 +15,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <HomePage /> },
       { path: "auth", element: <AuthPage /> },
-      { path: "posts/:productId", element: <PostPage /> },
+      { path: "posts/:productId", element: <EditPostPage /> },
       { path: "create-new-post", element: <NewPostPage /> },
     ],
   },

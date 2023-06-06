@@ -1,22 +1,27 @@
 import classes from './AuthorCard.module.css';
 
-function AuthorCard(props: { author: string; description: string, src: string, githubLink: string }) {
+function AuthorCard(props: {
+  author: string;
+  description: string;
+  src: string;
+  githubLink: string;
+}) {
   return (
     <div
-      className={`${classes['bg-card']} flex py-4 px-3 xxs:px-5 xs:p-5 xxs:bottom-20 xs:bottom-28 sm:bottom-36 sm:px-8 md:w-4/5 max-w-lg s:m-auto mx-2 rounded-xl shadow-md relative bottom-16`}
+      className={`${classes['bg-card']} flex flex-col p-3 mx-2 rounded-xl shadow-md max-w-lg relative bottom-16 xxs:bottom-20 xs:flex-row xs:p-4 xs:bottom-28 s:m-auto sm:bottom-36 sm:px-6 md:w-4/5 xl:max-w-xl`}
     >
       <img
         src={props.src}
         alt="author"
         width="148"
-        className="self-center rounded-lg mr-6 xs:w-40 sm:w-44 min-w-[152px] max-h-[148px]"
+        className="self-center shadow-md rounded-lg my-2 xs:mr-6 s:w-40 xl:w-44"
       />
-      <div className="text-center w-full">
-        <h2 className="text-xl xs:text-2xl ">{props.author}</h2>
+      <div className="text-center">
+        <h2 className="text-2xl">{props.author}</h2>
         <a
           target="_blank"
           href={props.githubLink}
-          className="text-blue-500 font-medium text-xs my-4 align-middle"
+          className="text-blue-500 font-medium text-xs my-4"
         >
           <p className="inline-block text-sm hover:underline">GITHUB</p>
           <br />
@@ -24,10 +29,10 @@ function AuthorCard(props: { author: string; description: string, src: string, g
             src="./github-logo.svg"
             alt="github logo"
             width="24"
-            className="inline-block mb-1"
+            className="inline-block mb-2"
           />
         </a>
-        <p>{props.description}</p>
+        <p className="xl:text-lg">{props.description}</p>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import AuthorCard from '../components/AuthorCard';
 
 function HomePage() {
-  const authorInfo = [
+  const authorInfo: string[] = [
     'Jakub Jurkian',
     "Welcome to my blog post! If you are into tech-related topics, you couldn't find a better place.",
     './me.jpg',

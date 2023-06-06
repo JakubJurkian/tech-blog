@@ -4,7 +4,7 @@
 
 @layer components {
   .menu-el {
-    @apply block md:inline-block px-3 py-2 rounded-md text-white hover:bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-900 border-b-2 border-b-slate-500 md:border-0;
+    @apply block md:inline-block px-3 py-2 md:rounded-md text-white hover:bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-900 border-b-2 border-b-slate-500 md:border-0;
   }
 }
 

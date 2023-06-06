@@ -1,4 +1,4 @@
-function PostPage() {
+function EditPostPage() {
   return (
     <>
       <h1>Post Page</h1>
@@ -6,4 +6,4 @@ function PostPage() {
   );
 }
 
-export default PostPage;
+export default EditPostPage;
