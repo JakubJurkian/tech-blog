@@ -1,15 +1,29 @@
-import SearchInput from "./SearchInput";
+import Post from './Post';
 
-function Posts() {
-  return <main className="max-w-3xl mx-2 md:m-auto">
+interface MyObject {
+  [key: string]: string;
+}
+type MyArray = MyObject[];
+
+function Posts(props: { posts: MyArray}) {
+  return (
     <section>
-        <div className="flex justify-between">
-            <code>Posts</code>
-            <code>{2} posts</code>
-        </div>
-        <SearchInput />
+      <ul className='flex flex-col gap-5'>
+        {props.posts.map((post) => {
+          return (
+            <Post
+              key={post.id}
+              link={post.link}
+              title={post.title}
+              description={post.description}
+              img={post.img}
+              date={post.date}
+            />
+          );
+        })}
+      </ul>
     </section>
-  </main>
+  );
 }
 
 export default Posts;
