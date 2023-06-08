@@ -1,4 +1,5 @@
 import AuthorCard from '../components/AuthorCard';
+import Posts from '../components/Posts';
 
 function HomePage() {
   const authorInfo: string[] = [
@@ -17,7 +18,7 @@ function HomePage() {
         githubLink={authorInfo[3]}
       />
       <div>
-        <h1>Home Page</h1>
+        <Posts />
       </div>
     </div>
   );
