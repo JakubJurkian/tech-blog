@@ -37,7 +37,7 @@ function HomePage() {
         src={authorInfo[2]}
         githubLink={authorInfo[3]}
       />
-      <div className="relative bottom-16 sm:bottom-28">
+      <div className="relative bottom-12 xxs:bottom-14 xs:bottom-20 sm:bottom-28">
         <main className="max-w-3xl mx-2 md:m-auto lg:max-w-4xl">
           <section>
             <div className="flex justify-between">

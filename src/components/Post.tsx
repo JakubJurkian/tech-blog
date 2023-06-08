@@ -12,7 +12,7 @@ function Post(props: {
       <div className="flex flex-col gap-5 p-6 bg-[#141b2b] rounded-xl shadow-lg">
         <header className="flex justify-between">
           <h2 className='text-xl'>{props.title}</h2>
-          <small>{props.date}</small>
+          <small className='self-center'>{props.date}</small>
         </header>
         <img src={props.img} alt={props.title} />
         <p>{props.description}</p>
