@@ -25,7 +25,6 @@ function App() {
           </div>
           <button
             type="button"
-            // add better focus logic
             className="md:hidden bg-gray-900 p-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white transition duration-150 ease-in-out"
             onClick={() => setShowMobileMenu(!showMobileMenu)}
           >
