@@ -6,7 +6,7 @@
 //   initialState: { counter: 0, showCounter: true },
 //   reducers: {
 //     increment(state) { state.counter++; },
-//     //...other Reducers
+//     ...other Reducers
 //   },
 // });
 

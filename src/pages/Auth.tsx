@@ -1,8 +1,10 @@
+import Signup from "../components/Signup";
+
 function AuthPage() {
   return (
-    <>
-      <h1>Auth Page</h1>
-    </>
+    <div className="relative">
+      <Signup />
+    </div>
   );
 }
 
