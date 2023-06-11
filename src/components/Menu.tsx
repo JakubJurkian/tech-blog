@@ -9,7 +9,7 @@ const Menu = (props: { onClickedElement(arg: boolean): void }) => {
   return (
     <ul className="py-2 space-y-3 font-medium text-slate-700 md:flex md:space-y-0 md:space-x-2">
       <li>
-        <NavLink to="/auth" className="menu-el" onClick={clickHandler}>
+        <NavLink to="/about-me" className="menu-el" onClick={clickHandler}>
           About me
         </NavLink>
       </li>

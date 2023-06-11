@@ -5,6 +5,7 @@ import HomePage from "./pages/Home";
 import EditPostPage from "./pages/Post";
 import NewPostPage from "./pages/NewPost";
 import AuthPage from "./pages/Auth";
+import AboutMePage from "./pages/AboutMe";
 import RootLayout from "./pages/Root";
 
 const router = createBrowserRouter([
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
       { path: "auth", element: <AuthPage /> },
       { path: "posts/:productId", element: <EditPostPage /> },
       { path: "create-new-post", element: <NewPostPage /> },
+      { path: "about-me", element: <AboutMePage /> },
     ],
   },
 ]);

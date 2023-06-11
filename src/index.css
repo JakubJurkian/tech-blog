@@ -7,7 +7,10 @@
     @apply block md:inline-block px-3 py-2 md:rounded-md text-white hover:bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-900 border-b-2 border-b-slate-500 md:border-0;
   }
   .form-input {
-    @apply w-full p-2 my-2 rounded-md bg-[#b3b3b3] border-[1px] border-[#1c2f41] focus:outline-0 focus:shadow-[#3B82F6] focus:shadow-[0_0_0_2px_#3294f8];
+    @apply bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-[#2563eb] focus:border-[#2563eb] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500;
+  }
+  .form-label {
+    @apply block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300;
   }
 }
 
@@ -18,7 +21,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: rgb(37, 41, 58);
+  background-color: rgb(32, 36, 51);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
