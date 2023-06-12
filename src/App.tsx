@@ -1,30 +1,39 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import ErrorPage from "./pages/Error";
-import HomePage from "./pages/Home";
-import EditPostPage from "./pages/Post";
-import NewPostPage from "./pages/NewPost";
-import AuthPage from "./pages/Auth";
-import AboutMePage from "./pages/AboutMe";
-import RootLayout from "./pages/Root";
+import { Provider } from 'react-redux';
+import store from './store';
+
+import ErrorPage from './pages/Error';
+import HomePage from './pages/Home';
+import EditPostPage from './pages/Post';
+import NewPostPage from './pages/NewPost';
+import LoginPage from './pages/Login';
+import RegisterPage from './pages/Register';
+import AboutMePage from './pages/AboutMe';
+import RootLayout from './pages/Root';
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <RootLayout />,
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <HomePage /> },
-      { path: "auth", element: <AuthPage /> },
-      { path: "posts/:productId", element: <EditPostPage /> },
-      { path: "create-new-post", element: <NewPostPage /> },
-      { path: "about-me", element: <AboutMePage /> },
+      { path: 'register', element: <RegisterPage /> },
+      { path: 'login', element: <LoginPage /> },
+      { path: 'posts/:productId', element: <EditPostPage /> },
+      { path: 'create-new-post', element: <NewPostPage /> },
+      { path: 'about-me', element: <AboutMePage /> },
     ],
   },
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
+  );
 }
 
 export default App;

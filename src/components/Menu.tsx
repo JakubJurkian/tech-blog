@@ -14,8 +14,8 @@ const Menu = (props: { onClickedElement(arg: boolean): void }) => {
         </NavLink>
       </li>
       <li>
-        <NavLink to="/auth" className="menu-el" onClick={clickHandler}>
-          Login/Register
+        <NavLink to="/register" className="menu-el" onClick={clickHandler}>
+          Register
         </NavLink>
       </li>
       <li>

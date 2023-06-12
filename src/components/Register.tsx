@@ -1,6 +1,7 @@
 import { useRef } from 'react';
+import { Link } from 'react-router-dom';
 
-export default function Signup() {
+export default function RegisterForm() {
   const nameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -41,7 +42,7 @@ export default function Signup() {
                 </div>
                 <button type="submit" className="w-full text-white bg-[#2057cd] hover:bg-[#1d4ed8] focus:ring-2 focus:outline-none focus:ring-[#1e40af] font-medium rounded-lg text-base px-5 py-2.5 text-center">Create an account</button>
                  <p className="text-sm text-gray-500 dark:text-gray-300">
-                    Already have an account? <a href="#" className="font-medium hover:underline text-[#3b82f6]">Login here</a>
+                    Already have an account? <Link to='/login' className="font-medium hover:underline text-[#3b82f6]">Login here</Link>
                  </p>
               </form>
           </div>
