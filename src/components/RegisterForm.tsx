@@ -1,0 +1,210 @@
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import useFormValidation from '../hooks/use-form-validation';
+
+import { login } from '../store/slices/authSlice';
+
+const errorMessage = (value: string) => {
+  if (value === 'confirmPassword') {
+    return <p>your passwords do not fit.</p>;
+  } else {
+    <p>Please enter a valid {value}.</p>;
+  }
+};
+
+export default function RegisterForm() {
+  const dispatch = useDispatch();
+  const validateValue = (value: string) => {
+    if (value === 'name') {
+      return value.trim() !== '';
+    } else if (value === 'email') {
+      const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+      return emailRegex.test(email);
+    } else if (value === 'password') {
+      const passwordRegex =
+        /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+      return passwordRegex.test(password);
+    } else if (value === 'confirmPassword') {
+      return password === confirmPassword;
+    }
+    return true;
+  };
+
+  const {
+    value: name,
+    isValid: nameIsValid,
+    hasError: nameHasError,
+    valueChangeHandler: nameChangeHandler,
+    inputBlurHandler: nameBlurHandler,
+    reset: nameReset,
+  } = useFormValidation(validateValue);
+
+  const {
+    value: email,
+    isValid: emailIsValid,
+    hasError: emailHasError,
+    valueChangeHandler: emailChangeHandler,
+    inputBlurHandler: emailBlurHandler,
+    reset: emailReset,
+  } = useFormValidation(validateValue);
+
+  const {
+    value: password,
+    isValid: passwordIsValid,
+    hasError: passwordHasError,
+    valueChangeHandler: passwordChangeHandler,
+    inputBlurHandler: passwordBlurHandler,
+    reset: passwordReset,
+  } = useFormValidation(validateValue);
+
+  const {
+    value: confirmPassword,
+    isValid: confirmPasswordIsValid,
+    hasError: confirmPasswordHasError,
+    valueChangeHandler: confirmPasswordChangeHandler,
+    inputBlurHandler: confirmPasswordBlurHandler,
+    reset: confirmPasswordReset,
+  } = useFormValidation(validateValue);
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+
+    if (
+      nameIsValid &&
+      emailIsValid &&
+      passwordIsValid &&
+      confirmPasswordIsValid &&
+      password === confirmPassword
+    ) {
+      const user = { name, email, password };
+      dispatch(login(user));
+      nameReset();
+      emailReset();
+      passwordReset();
+      confirmPasswordReset();
+    } else {
+      console.log('error');
+    }
+  };
+
+  return (
+    <>
+      <div className="flex flex-col items-center relative bottom-14 xs:bottom-24 s:bottom-36 sm:bottom-40 md:bottom-44 mx-auto px-3 md:h-screen lg:py-0">
+        <div className="w-full rounded-lg shadow-md border md:mt-0 sm:max-w-lg xl:p-0 bg-gray-900 border-gray-700">
+          <div className="p-6 space-y-4 sm:p-8">
+            <h1 className="text-2xl text-center font-bold tracking-tight md:text-2xl text-gray-300">
+              Create an Account
+            </h1>
+            <form className="space-y-4" action="#" onSubmit={handleSubmit}>
+              <div>
+                <label htmlFor="name" className="form-label">
+                  Name
+                </label>
+                <input
+                  id="name"
+                  value={name}
+                  onChange={nameChangeHandler}
+                  onBlur={nameBlurHandler}
+                  type="text"
+                  name="name"
+                  placeholder="Your Name"
+                  className="form-input"
+                  required
+                />
+                {nameHasError && errorMessage('name')}
+              </div>
+              <div>
+                <label htmlFor="email" className="form-label">
+                  Your email
+                </label>
+                <input
+                  id="email"
+                  value={email}
+                  onChange={emailChangeHandler}
+                  onBlur={emailBlurHandler}
+                  type="email"
+                  name="email"
+                  placeholder="name@email.com"
+                  className="form-input"
+                  required
+                />
+                {emailHasError && errorMessage('email')}
+              </div>
+              <div>
+                <label htmlFor="password" className="form-label">
+                  Password
+                </label>
+                <input
+                  id="password"
+                  value={password}
+                  onChange={passwordChangeHandler}
+                  onBlur={passwordBlurHandler}
+                  type="password"
+                  name="password"
+                  placeholder="••••••••"
+                  className="form-input"
+                  required
+                />
+                {passwordHasError && errorMessage('password')}
+              </div>
+              <div>
+                <label htmlFor="confirm-password" className="form-label">
+                  Confirm password
+                </label>
+                <input
+                  id="confirm-password"
+                  value={confirmPassword}
+                  onChange={confirmPasswordChangeHandler}
+                  onBlur={confirmPasswordBlurHandler}
+                  type="password"
+                  name="confirm-password"
+                  placeholder="••••••••"
+                  className="form-input"
+                  required
+                />
+                {confirmPasswordHasError && errorMessage('name')}
+              </div>
+              <div className="flex items-start">
+                <div className="flex items-center h-5">
+                  <input
+                    id="terms"
+                    aria-describedby="terms"
+                    type="checkbox"
+                    className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
+                    required
+                  />
+                </div>
+                <div className="ml-3 text-sm">
+                  <label htmlFor="terms" className="font-light text-gray-300">
+                    I accept the{' '}
+                    <a
+                      className="font-medium hover:underline text-[#3b82f6]"
+                      href="#"
+                    >
+                      Terms and Conditions
+                    </a>
+                  </label>
+                </div>
+              </div>
+              <button
+                type="submit"
+                className="w-full text-white bg-[#2057cd] hover:bg-[#1d4ed8] focus:ring-2 focus:outline-none focus:ring-[#1e40af] font-medium rounded-lg text-base px-5 py-2.5 text-center"
+              >
+                Create an account
+              </button>
+              <p className="text-sm text-gray-500 dark:text-gray-300">
+                Already have an account?{' '}
+                <Link
+                  to="/login"
+                  className="font-medium hover:underline text-[#3b82f6]"
+                >
+                  Login here
+                </Link>
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
