@@ -7,10 +7,16 @@
     @apply block md:inline-block px-3 py-2 md:rounded-md text-white hover:bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-900 border-b-2 border-b-slate-500 md:border-0;
   }
   .form-input {
-    @apply bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-[#2563eb] focus:border-[#2563eb] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500;
+    @apply bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-[#2563eb] outline-none focus:border-[#2563eb] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500;
   }
   .form-label {
     @apply block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300;
+  }
+  .form-input-error {
+    @apply border-b-red-500 focus:outline-none focus:border-b-red-500;
+  }
+  .error-message {
+    @apply mt-2 text-red-500;
   }
 }
 

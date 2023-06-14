@@ -59,12 +59,12 @@ const LoginForm: React.FC = () => {
                 type="email"
                 name="email"
                 placeholder="name@email.com"
-                className="form-input"
+                className={`form-input ${emailHasError ? 'form-input-error' : null}`}
                 onChange={emailChangeHandler}
                 onBlur={emailBlurHandler}
                 required
               />
-              {emailHasError && <p>Please enter a valid email.</p>}
+              {emailHasError && <p className='error-message'>Please enter a valid email.</p>}
             </div>
             <div>
               <label htmlFor="password" className="form-label">
@@ -76,12 +76,12 @@ const LoginForm: React.FC = () => {
                 type="password"
                 name="password"
                 placeholder="••••••••"
-                className="form-input"
+                className={`form-input ${passwordHasError ? 'form-input-error' : null}`}
                 onChange={passwordChangeHandler}
                 onBlur={passwordBlurHandler}
                 required
               />
-              {passwordHasError && <p>Please enter a valid password.</p>}
+              {passwordHasError && <p className='error-message'>Please enter a valid password.</p>}
             </div>
             <button
               type="submit"

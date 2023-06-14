@@ -14,6 +14,10 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
+    register: (state, action: PayloadAction<any>) => {
+      state.isLoggedIn = true;
+      state.user = action.payload;
+    },
     login: (state, action: PayloadAction<any>) => {
       state.isLoggedIn = true;
       state.user = action.payload;
@@ -25,6 +29,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { login, logout } = authSlice.actions;
+export const { register, login, logout } = authSlice.actions;
 
 export default authSlice.reducer;
