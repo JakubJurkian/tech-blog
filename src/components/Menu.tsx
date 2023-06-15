@@ -1,11 +1,11 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { RootState } from '../store';
+import { logout } from '../store/slices/authSlice';
 
 const Menu = (props: { onClickedElement(arg: boolean): void }) => {
-  const user = useSelector((state: RootState) => state.auth.user);
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
-
+  const dispatch = useDispatch();
   function clickHandler() {
     props.onClickedElement(true);
   }
@@ -19,7 +19,7 @@ const Menu = (props: { onClickedElement(arg: boolean): void }) => {
       </li>
       <li>
         <NavLink to="/register" className="menu-el" onClick={clickHandler}>
-          Register
+          Sign Up
         </NavLink>
       </li>
     </>
@@ -33,11 +33,6 @@ const Menu = (props: { onClickedElement(arg: boolean): void }) => {
         </NavLink>
       </li>
       <li>
-        <NavLink to="/logout" className="menu-el" onClick={clickHandler}>
-          Logout
-        </NavLink>
-      </li>
-      <li>
         <NavLink
           to="/create-new-post"
           className="menu-el"
@@ -45,6 +40,11 @@ const Menu = (props: { onClickedElement(arg: boolean): void }) => {
         >
           Create a new post
         </NavLink>
+      </li>
+      <li>
+        <button className="menu-el" onClick={() => dispatch(logout())}>
+          Logout
+        </button>
       </li>
     </>
   );

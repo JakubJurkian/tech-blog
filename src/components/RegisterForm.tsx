@@ -1,10 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import useFormValidation from '../hooks/use-form-validation';
-
 import { register } from '../store/slices/authSlice';
-import { RootState } from '../store';
 
 const errorMessage = (value: string) => {
   if (value === 'confirmPassword') {
@@ -15,9 +13,8 @@ const errorMessage = (value: string) => {
 };
 
 export default function RegisterForm() {
-  const user = useSelector((state: RootState) => state.auth.user);
-  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
-
+  
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const validateName = (value: string) => {
     return value.trim() !== '';
@@ -87,12 +84,13 @@ export default function RegisterForm() {
       emailReset();
       passwordReset();
       confirmPasswordReset();
+      navigate('/');
     }
   };
 
   return (
     <>
-      <div className="flex flex-col items-center relative bottom-14 xs:bottom-24 s:bottom-36 sm:bottom-40 md:bottom-44 mx-auto px-3 md:h-screen lg:py-0">
+      <div className="flex flex-col items-center relative bottom-16 xxs:bottom-20 xs:bottom-28 s:bottom-36 sm:bottom-48 md:bottom-60 mx-auto px-3 md:h-screen lg:py-0">
         <div className="w-full rounded-lg shadow-md border md:mt-0 sm:max-w-lg xl:p-0 bg-gray-900 border-gray-700">
           <div className="p-6 space-y-4 sm:p-8">
             <h1 className="text-2xl text-center font-bold tracking-tight md:text-2xl text-gray-300">

@@ -1,10 +1,12 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from '../store/slices/authSlice';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import useFormValidation from '../hooks/use-form-validation';
 
 const LoginForm: React.FC = () => {
+  
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const validateValue = (value: string) => {
     return value.trim() !== '';
@@ -36,13 +38,14 @@ const LoginForm: React.FC = () => {
       dispatch(login(user));
       emailReset();
       passwordReset();
+      navigate('/');
     } else {
       console.log('error');
     }
   };
 
   return (
-    <div className="flex flex-col items-center relative bottom-14 xs:bottom-24 s:bottom-36 sm:bottom-40 md:bottom-44 mx-auto px-3 md:h-screen lg:py-0">
+    <div className="flex flex-col items-center relative bottom-14 xxs:bottom-20 xs:bottom-28 s:bottom-36 sm:bottom-48 md:bottom-52 mx-auto px-3 md:h-screen lg:py-0">
       <div className="w-full rounded-lg shadow-md border md:mt-0 sm:max-w-lg xl:p-0 bg-gray-900 border-gray-700">
         <div className="p-6 space-y-4 sm:p-8">
           <h1 className="text-2xl text-center font-bold tracking-tight md:text-2xl text-gray-300">
