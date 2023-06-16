@@ -1,7 +1,13 @@
+import NewPost from "../components/NewPost";
+
 function NewPostPage() {
+  const handleSave = (content: string) => {
+    console.log(content);
+  }
+
   return (
     <>
-      <h1>New Post page</h1>
+      <NewPost onSave={handleSave} />
     </>
   );
 }

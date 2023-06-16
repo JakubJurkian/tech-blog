@@ -9,7 +9,7 @@ const DUMMY_POSTS = [
     description: 'If you already know, I work so hard on...',
     img: 'https://fresh.deno.dev/home-og.png',
     date: '3 days ago',
-    link: '/1',
+    link: '/posts/1',
   },
   {
     id: 'p2',
@@ -17,7 +17,7 @@ const DUMMY_POSTS = [
     description: 'testestestest',
     img: 'https://fresh.deno.dev/home-og.png',
     date: '28 days ago',
-    link: '/2',
+    link: '/posts/2',
   },
 ];
 

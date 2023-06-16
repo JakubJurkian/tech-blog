@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { RootState } from '../store';
-import { logout } from '../store/slices/authSlice';
+// import { logout } from '../store/slices/authSlice';
 
 const Menu = (props: { onClickedElement(arg: boolean): void }) => {
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
@@ -42,9 +42,9 @@ const Menu = (props: { onClickedElement(arg: boolean): void }) => {
         </NavLink>
       </li>
       <li>
-        <button className="menu-el" onClick={() => dispatch(logout())}>
+        {/* <button className="menu-el w-full text-left" onClick={() => dispatch(logout())}>
           Logout
-        </button>
+        </button> */}
       </li>
     </>
   );

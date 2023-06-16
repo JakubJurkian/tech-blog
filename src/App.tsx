@@ -5,7 +5,7 @@ import store from './store';
 
 import ErrorPage from './pages/Error';
 import HomePage from './pages/Home';
-import EditPostPage from './pages/Post';
+import PostPage from './pages/Post';
 import NewPostPage from './pages/NewPost';
 import LoginPage from './pages/Login';
 import RegisterPage from './pages/Register';
@@ -21,7 +21,7 @@ const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       { path: 'register', element: <RegisterPage /> },
       { path: 'login', element: <LoginPage /> },
-      { path: 'posts/:productId', element: <EditPostPage /> },
+      { path: 'posts/:productId', element: <PostPage /> },
       { path: 'create-new-post', element: <NewPostPage /> },
       { path: 'about-me', element: <AboutMePage /> },
     ],

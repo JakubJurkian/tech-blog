@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { login } from '../store/slices/authSlice';
+// import { login } from '../store/slices/authSlice';
 import { Link, useNavigate } from 'react-router-dom';
 import useFormValidation from '../hooks/use-form-validation';
 
@@ -35,7 +35,7 @@ const LoginForm: React.FC = () => {
 
     if (emailIsValid && passwordIsValid) {
       const user = { email, password };
-      dispatch(login(user));
+      // dispatch(login(user));
       emailReset();
       passwordReset();
       navigate('/');

@@ -2,18 +2,17 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import useFormValidation from '../hooks/use-form-validation';
-import { register } from '../store/slices/authSlice';
+import { createUser } from '../store/slices/authSlice';
 
 const errorMessage = (value: string) => {
   if (value === 'confirmPassword') {
-    return <p className='error-message'>your passwords do not fit.</p>;
+    return <p className="error-message">your passwords do not fit.</p>;
   } else {
-    return <p className='error-message'>Please enter a valid {value}.</p>;
+    return <p className="error-message">Please enter a valid {value}.</p>;
   }
 };
 
 export default function RegisterForm() {
-  
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const validateName = (value: string) => {
@@ -78,8 +77,16 @@ export default function RegisterForm() {
       confirmPasswordIsValid &&
       password === confirmPassword
     ) {
-      const user = { name, email, password };
-      dispatch(register(user));
+      const user = { email, password };
+      dispatch(createUser(user))
+        .then((userCredential: any) => {
+          const user = userCredential.user;
+          console.log(user);
+        })
+        .catch((error: any) => {
+          console.log(error.code);
+        });
+
       nameReset();
       emailReset();
       passwordReset();
@@ -109,7 +116,9 @@ export default function RegisterForm() {
                   type="text"
                   name="name"
                   placeholder="Your Name"
-                  className={`form-input ${nameHasError ? 'form-input-error' : null}`}
+                  className={`form-input ${
+                    nameHasError ? 'form-input-error' : null
+                  }`}
                   required
                 />
                 {nameHasError && errorMessage('name')}
@@ -126,7 +135,9 @@ export default function RegisterForm() {
                   type="email"
                   name="email"
                   placeholder="name@email.com"
-                  className={`form-input ${emailHasError ? 'form-input-error' : null}`}
+                  className={`form-input ${
+                    emailHasError ? 'form-input-error' : null
+                  }`}
                   required
                 />
                 {emailHasError && errorMessage('email')}
@@ -143,11 +154,13 @@ export default function RegisterForm() {
                   type="password"
                   name="password"
                   placeholder="••••••••"
-                  className={`form-input ${passwordHasError ? 'form-input-error' : null}`}
+                  className={`form-input ${
+                    passwordHasError ? 'form-input-error' : null
+                  }`}
                   required
                 />
                 {passwordHasError && errorMessage('password')}
-                <ul className='bg-slate-700 rounded-lg p-2 mr-6 mt-2 w-3/4 text text-xs'>
+                <ul className="bg-slate-700 rounded-lg p-2 mr-6 mt-2 w-3/4 text text-xs">
                   <span>Password should contain at least: </span>
                   <li>- 6 characters</li>
                   <li>- one uppercase</li>
@@ -168,7 +181,9 @@ export default function RegisterForm() {
                   type="password"
                   name="confirm-password"
                   placeholder="••••••••"
-                  className={`form-input ${confirmPasswordHasError ? 'form-input-error' : null}`}
+                  className={`form-input ${
+                    confirmPasswordHasError ? 'form-input-error' : null
+                  }`}
                   required
                 />
                 {confirmPasswordHasError && errorMessage('confirmPassword')}

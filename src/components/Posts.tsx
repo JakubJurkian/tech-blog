@@ -1,4 +1,4 @@
-import Post from './Post';
+import PostPreview from './PostPreview';
 
 interface MyObject {
   [key: string]: string;
@@ -11,7 +11,7 @@ function Posts(props: { posts: MyArray}) {
       <ul className='flex flex-col gap-5'>
         {props.posts.map((post) => {
           return (
-            <Post
+            <PostPreview
               key={post.id}
               link={post.link}
               title={post.title}
