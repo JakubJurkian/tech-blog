@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import useFormValidation from '../hooks/use-form-validation';
-import { createUser } from '../store/slices/authSlice';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebase';
+
 
 const errorMessage = (value: string) => {
   if (value === 'confirmPassword') {
@@ -13,8 +14,8 @@ const errorMessage = (value: string) => {
 };
 
 export default function RegisterForm() {
+
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const validateName = (value: string) => {
     return value.trim() !== '';
   };
@@ -67,7 +68,7 @@ export default function RegisterForm() {
     reset: confirmPasswordReset,
   } = useFormValidation(validateConfirmPassword);
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
     if (
@@ -77,21 +78,29 @@ export default function RegisterForm() {
       confirmPasswordIsValid &&
       password === confirmPassword
     ) {
-      const user = { email, password };
-      dispatch(createUser(user))
-        .then((userCredential: any) => {
+
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed in
           const user = userCredential.user;
           console.log(user);
+          nameReset();
+          emailReset();
+          passwordReset();
+          confirmPasswordReset();
+          navigate('/');
         })
-        .catch((error: any) => {
-          console.log(error.code);
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorCode, errorMessage);
         });
 
-      nameReset();
-      emailReset();
-      passwordReset();
-      confirmPasswordReset();
-      navigate('/');
+        // nameReset();
+        // emailReset();
+        // passwordReset();
+        // confirmPasswordReset();
+        // navigate('/');
     }
   };
 

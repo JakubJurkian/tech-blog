@@ -1,11 +1,12 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-// import { login } from '../store/slices/authSlice';
 import { Link, useNavigate } from 'react-router-dom';
 import useFormValidation from '../hooks/use-form-validation';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebase';
+import { authSuccess } from '../store/authSlice';
 
 const LoginForm: React.FC = () => {
-  
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const validateValue = (value: string) => {
@@ -34,13 +35,20 @@ const LoginForm: React.FC = () => {
     event.preventDefault();
 
     if (emailIsValid && passwordIsValid) {
-      const user = { email, password };
-      // dispatch(login(user));
-      emailReset();
-      passwordReset();
-      navigate('/');
-    } else {
-      console.log('error');
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          // dispatch(authSuccess({email, password}));
+          console.log(user);
+          emailReset();
+          passwordReset();
+          navigate('/');
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorCode, errorMessage);
+        });
     }
   };
 
