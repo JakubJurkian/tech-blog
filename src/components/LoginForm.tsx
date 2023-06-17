@@ -34,6 +34,9 @@ const LoginForm: React.FC = () => {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
+    //..add new logic for login
+    dispatch();
+
     if (emailIsValid && passwordIsValid) {
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
