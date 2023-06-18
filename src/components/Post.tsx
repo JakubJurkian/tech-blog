@@ -1,12 +1,15 @@
-export default function Post() {
-  return <div>
+export default function Post(props: {
+  author: string;
+  title: string;
+  img: string;
+  text: string;
+}) {
+  return (
     <div>
-        author, date
+      <div>{props.author}</div>
+      <h1>{props.title}</h1>
+      <img src={props.img} />
+      <p>{props.text}</p>
     </div>
-    <h1>title</h1>
-    <div>
-        img
-    </div>
-    custom text
-  </div>;
+  );
 }

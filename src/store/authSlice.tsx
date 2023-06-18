@@ -1,16 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { User } from 'firebase/auth';
-
-import { auth } from '../firebase';
 
 interface AuthState {
-  user: User | null;
+  user: { email: string; password: string; } | null;
+  isLoggedIn: boolean;
   loading: boolean;
   error: string | null;
 }
 
 const initialState: AuthState = {
   user: null,
+  isLoggedIn: false,
   loading: false,
   error: null,
 };
@@ -22,20 +21,23 @@ const authSlice = createSlice({
     authLoading: (state) => {
       state.loading = true;
     },
-    authSuccess: (state, action: PayloadAction<User>) => {
+    authSuccess: (state, action: PayloadAction<{ email: string; password: string; }>) => {
       state.user = action.payload;
       state.loading = false;
       state.error = null;
+      state.isLoggedIn = true;
     },
     authFailure: (state, action: PayloadAction<string>) => {
       state.user = null;
       state.loading = false;
       state.error = action.payload;
+      state.isLoggedIn = false;
     },
     authLogout: (state) => {
       state.user = null;
       state.loading = false;
       state.error = null;
+      state.isLoggedIn = false;
     },
   },
 });
@@ -44,29 +46,3 @@ export const { authLoading, authSuccess, authFailure, authLogout } =
   authSlice.actions;
 
 export default authSlice.reducer;
-
-export const loginUser = (
-    email: string,
-    password: string
-  ): AppThunk => async (dispatch) => {
-    try {
-      dispatch(authLoading());
-      const userCredential = await auth().signInWithEmailAndPassword(
-        email,
-        password
-      );
-      dispatch(authSuccess(userCredential.user!));
-    } catch (error) {
-      dispatch(authFailure(error.message));
-    }
-  };
-  
-  export const logoutUser = (): AppThunk => async (dispatch) => {
-    try {
-      dispatch(authLoading());
-      await auth().signOut();
-      dispatch(authLogout());
-    } catch (error) {
-      dispatch(authFailure(error.message));
-    }
-  };

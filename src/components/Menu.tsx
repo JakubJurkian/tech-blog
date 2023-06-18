@@ -1,33 +1,17 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { RootState } from '../store';
 
 // import { logout } from '../store/slices/authSlice';
-import { User, getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
-import { useEffect, useState } from 'react';
-import { auth } from '../firebase';
+import { RootState } from '../store/store';
+import { authLogout } from '../store/authSlice';
 
 const Menu = (props: { onClickedElement(arg: boolean): void }) => {
-
-  const [authUser, setAuthUser] = useState<null | User>(null);
-
+  const dispatch = useDispatch();
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
 
   function clickHandler() {
     props.onClickedElement(true);
   }
-
-  useEffect(() => {
-    const listen = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setAuthUser(user);
-      } else {
-        setAuthUser(null);
-      }
-    })
-  }, []);
-
-  const auth = getAuth();
 
   const notLogged = (
     <>
@@ -64,7 +48,7 @@ const Menu = (props: { onClickedElement(arg: boolean): void }) => {
         {/* <button className="menu-el w-full text-left" onClick={() => dispatch(logout())}>
           Logout
         </button> */}
-        <button className="menu-el w-full text-left" onClick={() => signOut(auth)}>
+        <button className="menu-el w-full text-left" onClick={() => dispatch(authLogout())}>
           Logout
         </button>
       </li>

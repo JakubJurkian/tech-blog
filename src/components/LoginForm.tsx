@@ -34,14 +34,11 @@ const LoginForm: React.FC = () => {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
-    //..add new logic for login
-    dispatch();
-
     if (emailIsValid && passwordIsValid) {
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           const user = userCredential.user;
-          // dispatch(authSuccess({email, password}));
+          dispatch(authSuccess({email, password}));
           console.log(user);
           emailReset();
           passwordReset();
