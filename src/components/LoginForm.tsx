@@ -36,10 +36,8 @@ const LoginForm: React.FC = () => {
 
     if (emailIsValid && passwordIsValid) {
       signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          const user = userCredential.user;
+        .then(() => {
           dispatch(authSuccess({email, password}));
-          console.log(user);
           emailReset();
           passwordReset();
           navigate('/');

@@ -1,17 +1,13 @@
 import { Outlet } from 'react-router-dom';
 
 import MainNavigation from '../components/MainNavigation';
-import bgPhoto from '/bg-photo.webp';
+import BackgroundImg from '../components/BackgroundImg';
 
 const RootLayout = () => {
   return (
     <>
       <div className="relative">
-        <img
-          src={bgPhoto}
-          alt="background photo"
-          className="max-h-96 w-full blur-sm border-b-2 border-gray-600"
-        />
+        <BackgroundImg />
         <MainNavigation />
       </div>
       <main>

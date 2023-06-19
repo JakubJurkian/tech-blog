@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import useFormValidation from '../hooks/use-form-validation';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
+import { useDispatch } from 'react-redux';
+import { authSuccess } from '../store/authSlice';
 
 
 const errorMessage = (value: string) => {
@@ -14,7 +16,7 @@ const errorMessage = (value: string) => {
 };
 
 export default function RegisterForm() {
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const validateName = (value: string) => {
     return value.trim() !== '';
@@ -80,10 +82,8 @@ export default function RegisterForm() {
     ) {
 
       createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          // Signed in
-          const user = userCredential.user;
-          console.log(user);
+        .then(() => {
+          dispatch(authSuccess({email, password}));
           nameReset();
           emailReset();
           passwordReset();
@@ -95,12 +95,6 @@ export default function RegisterForm() {
           const errorMessage = error.message;
           console.log(errorCode, errorMessage);
         });
-
-        // nameReset();
-        // emailReset();
-        // passwordReset();
-        // confirmPasswordReset();
-        // navigate('/');
     }
   };
 
