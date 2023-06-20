@@ -13,7 +13,7 @@ function Posts(props: { posts: MyArray}) {
           return (
             <PostPreview
               key={post.id}
-              link={post.link}
+              link={post.id}
               title={post.title}
               description={post.description}
               img={post.img}

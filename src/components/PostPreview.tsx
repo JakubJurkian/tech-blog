@@ -8,7 +8,7 @@ function PostPreview(props: {
   link: string;
 }) {
   return (
-    <Link to={props.link}>
+    <Link to={`/posts/${props.link}`}>
       <div className="flex flex-col gap-5 p-6 bg-[#141b2b] border-[1px] border-[#1c2f41] rounded-xl shadow-lg">
         <header className="flex justify-between">
           <h2 className='text-xl'>{props.title}</h2>
