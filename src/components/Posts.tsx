@@ -1,4 +1,6 @@
+import { useDispatch } from 'react-redux';
 import PostPreview from './PostPreview';
+import { howManyPosts } from '../store/postsSlice';
 
 interface MyObject {
   [key: string]: string;
@@ -6,6 +8,9 @@ interface MyObject {
 type MyArray = MyObject[];
 
 function Posts(props: { posts: MyArray}) {
+  const dispatch = useDispatch();
+  dispatch(howManyPosts(props.posts.length))
+
   return (
     <section>
       <ul className='flex flex-col gap-5'>

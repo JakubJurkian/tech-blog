@@ -21,7 +21,7 @@ const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       { path: 'register', element: <RegisterPage /> },
       { path: 'login', element: <LoginPage /> },
-      { path: 'posts/:productId', element: <PostPage /> },
+      { path: 'posts/:postId', element: <PostPage /> },
       { path: 'create-new-post', element: <NewPostPage /> },
       { path: 'about-me', element: <AboutMePage /> },
     ],

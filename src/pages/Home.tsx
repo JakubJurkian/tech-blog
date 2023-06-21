@@ -2,26 +2,10 @@ import { useCallback, useEffect, useState } from 'react';
 import AuthorCard from '../components/AuthorCard';
 import Posts from '../components/Posts';
 import SearchInput from '../components/SearchInput';
-import timeAgo from '../util/timeAgo';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../store/store';
+import { getPosts } from '../store/postsSlice';
 
-const DUMMY_POSTS = [
-  {
-    id: 'p1',
-    title: 'My new framework',
-    description: 'If you already know, I work so hard on...',
-    img: 'https://fresh.deno.dev/home-og.png',
-    date: '3 days ago',
-    link: '/posts/1',
-  },
-  {
-    id: 'p2',
-    title: 'My old framework',
-    description: 'testestestest',
-    img: 'https://fresh.deno.dev/home-og.png',
-    date: '28 days ago',
-    link: '/posts/2',
-  },
-];
 const authorInfo: string[] = [
   'Jakub Jurkian',
   "Welcome to my blog post! If you are into tech-related topics, you couldn't find a better place.",
@@ -39,6 +23,17 @@ type Post = {
 };
 
 function HomePage() {
+  const dispatch = useDispatch();
+  const postsAmount = useSelector((state: RootState) => state.posts.postsAmount);
+  
+  let quantity;
+  if (postsAmount === 1) {
+    quantity = <code>{postsAmount} post</code>
+  } else {
+    quantity = <code>{postsAmount} posts</code>
+  }
+
+
   const [posts, setPosts] = useState<Array<Post>>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -68,9 +63,10 @@ function HomePage() {
           description: data[key].description
         });
       }
-
       setPosts(loadedPosts);
-    } catch (error) {
+    
+      dispatch(getPosts(loadedPosts));
+    } catch (error: any) {
       setError(error.message);
     }
     setIsLoading(false);
@@ -115,11 +111,10 @@ function HomePage() {
           <section>
             <div className="flex justify-between">
               <code>Posts</code>
-              <code>{2} posts</code>
+              {quantity}
             </div>
             <SearchInput />
           </section>
-          {/* <Posts posts={DUMMY_POSTS} /> */}
           {content}
         </main>
       </div>
