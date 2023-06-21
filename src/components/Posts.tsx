@@ -1,15 +1,25 @@
 import { useDispatch } from 'react-redux';
 import PostPreview from './PostPreview';
 import { howManyPosts } from '../store/postsSlice';
+import { useEffect } from 'react';
 
-interface MyObject {
-  [key: string]: string;
+interface Post {
+  id: string;
+  author: string;
+  date: string;
+  description: string;
+  img: string;
+  text: string;
+  title: string;
 }
-type MyArray = MyObject[];
+type PostsArray = Post[];
 
-function Posts(props: { posts: MyArray}) {
+function Posts(props: { posts: PostsArray}) {
   const dispatch = useDispatch();
-  dispatch(howManyPosts(props.posts.length))
+  useEffect(() => {
+    dispatch(howManyPosts(props.posts.length));
+  }, [dispatch, props.posts.length]);
+  
 
   return (
     <section>

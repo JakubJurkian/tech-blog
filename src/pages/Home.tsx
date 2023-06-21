@@ -13,17 +13,9 @@ const authorInfo: string[] = [
   'https://github.com/JakubJurkian',
 ];
 
-type Post = {
-  id: string;
-  author: string;
-  date: string;
-  img: string;
-  text: string;
-  title: string;
-};
-
 function HomePage() {
   const dispatch = useDispatch();
+  const posts = useSelector((state: RootState) => state.posts.posts);
   const postsAmount = useSelector((state: RootState) => state.posts.postsAmount);
   
   let quantity;
@@ -34,7 +26,6 @@ function HomePage() {
   }
 
 
-  const [posts, setPosts] = useState<Array<Post>>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -63,14 +54,13 @@ function HomePage() {
           description: data[key].description
         });
       }
-      setPosts(loadedPosts);
     
       dispatch(getPosts(loadedPosts));
     } catch (error: any) {
       setError(error.message);
     }
     setIsLoading(false);
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     fetchMoviesHandler();
