@@ -7,14 +7,10 @@ function NewPostPage() {
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const navigate = useNavigate();
 
-  const handleSave = (content: string) => {
-    console.log(content);
-  }
-
   return (
     <>
       {!isLoggedIn && navigate('/')}
-      <NewPost onSave={handleSave} />
+      <NewPost />
     </>
   );
 }

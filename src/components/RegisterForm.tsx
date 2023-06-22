@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { ReactNode, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import useFormValidation from '../hooks/use-form-validation';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
 import { useDispatch } from 'react-redux';
 import { authSuccess } from '../store/authSlice';
+import Spinner from './spinner';
 
-
-const errorMessage = (value: string) => {
+const errorText = (value: string) => {
   if (value === 'confirmPassword') {
     return <p className="error-message">your passwords do not fit.</p>;
   } else {
@@ -16,6 +16,9 @@ const errorMessage = (value: string) => {
 };
 
 export default function RegisterForm() {
+  const [errorMessage, setErrorMessage] = useState<ReactNode | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const validateName = (value: string) => {
@@ -72,7 +75,6 @@ export default function RegisterForm() {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-
     if (
       nameIsValid &&
       emailIsValid &&
@@ -80,20 +82,24 @@ export default function RegisterForm() {
       confirmPasswordIsValid &&
       password === confirmPassword
     ) {
-
+      setIsLoading(true);
       createUserWithEmailAndPassword(auth, email, password)
         .then(() => {
-          dispatch(authSuccess({email, password}));
+          setIsLoading(false);
+          dispatch(authSuccess({ email, password }));
           nameReset();
           emailReset();
           passwordReset();
           confirmPasswordReset();
           navigate('/');
         })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(errorCode, errorMessage);
+        .catch(() => {
+          setIsLoading(false);
+          setErrorMessage(
+            <div className="text-center">
+              <p className="text-red-500 text-lg">This email already exists.</p>
+            </div>
+          );
         });
     }
   };
@@ -124,7 +130,7 @@ export default function RegisterForm() {
                   }`}
                   required
                 />
-                {nameHasError && errorMessage('name')}
+                {nameHasError && errorText('name')}
               </div>
               <div>
                 <label htmlFor="email" className="form-label">
@@ -143,7 +149,7 @@ export default function RegisterForm() {
                   }`}
                   required
                 />
-                {emailHasError && errorMessage('email')}
+                {emailHasError && errorText('email')}
               </div>
               <div>
                 <label htmlFor="password" className="form-label">
@@ -162,7 +168,7 @@ export default function RegisterForm() {
                   }`}
                   required
                 />
-                {passwordHasError && errorMessage('password')}
+                {passwordHasError && errorText('password')}
                 <ul className="bg-slate-700 rounded-lg p-2 mr-6 mt-2 w-3/4 text text-xs">
                   <span>Password should contain at least: </span>
                   <li>- 6 characters</li>
@@ -189,7 +195,7 @@ export default function RegisterForm() {
                   }`}
                   required
                 />
-                {confirmPasswordHasError && errorMessage('confirmPassword')}
+                {confirmPasswordHasError && errorText('confirmPassword')}
               </div>
               <div className="flex items-start">
                 <div className="flex items-center h-5">
@@ -213,6 +219,8 @@ export default function RegisterForm() {
                   </label>
                 </div>
               </div>
+              {isLoading && <Spinner />}
+              {errorMessage}
               <button
                 type="submit"
                 className="w-full text-white bg-[#2057cd] hover:bg-[#1d4ed8] focus:ring-2 focus:outline-none focus:ring-[#1e40af] font-medium rounded-lg text-base px-5 py-2.5 text-center"

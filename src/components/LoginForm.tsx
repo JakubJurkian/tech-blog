@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { ReactNode, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import useFormValidation from '../hooks/use-form-validation';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
 import { authSuccess } from '../store/authSlice';
+import Spinner from './spinner';
 
 const LoginForm: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [errorMessage, setErrorMessage] = useState<ReactNode | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const validateValue = (value: string) => {
-    return value.trim() !== '';
+    return value.trim() !== '' && value.length < 50;
   };
 
   const {
@@ -35,17 +38,18 @@ const LoginForm: React.FC = () => {
     event.preventDefault();
 
     if (emailIsValid && passwordIsValid) {
+      setIsLoading(true);
       signInWithEmailAndPassword(auth, email, password)
         .then(() => {
+          setIsLoading(false);
           dispatch(authSuccess({email, password}));
           emailReset();
           passwordReset();
           navigate('/');
         })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(errorCode, errorMessage);
+        .catch(() => {
+          setIsLoading(false);
+          setErrorMessage(<div className='text-center'><p className='text-red-500 text-lg'>Your email or password is incorrect.</p></div>)
         });
     }
   };
@@ -92,6 +96,8 @@ const LoginForm: React.FC = () => {
               />
               {passwordHasError && <p className='error-message'>Please enter a valid password.</p>}
             </div>
+            {isLoading && <Spinner />}
+            {errorMessage}
             <button
               type="submit"
               className="w-full text-white bg-[#2057cd] hover:bg-[#1d4ed8] focus:ring-2 focus:outline-none focus:ring-[#1e40af] font-medium rounded-lg text-base px-5 py-2.5 text-center"
