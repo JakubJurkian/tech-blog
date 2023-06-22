@@ -1,8 +1,9 @@
-console.log(timeAgo('2021-08-09T15:29:01+0000'));
+// console.log(timeAgo('2021-08-09T15:29:01+0000'));
+// console.log(timeAgo(new Date().toISOString()));
 
 export default function timeAgo(input: string | Date): string {
-  const date = input instanceof Date ? input : new Date(input);
-  const formatter = new Intl.RelativeTimeFormat('en');
+  const date = input instanceof Date ? input : new Date(input.replace(/\.\d+/, ''));
+  const formatter = new Intl.RelativeTimeFormat('en', {numeric: 'auto'});
   const ranges: Record<string, number> = {
     years: 3600 * 24 * 365,
     months: 3600 * 24 * 30,
@@ -23,5 +24,5 @@ export default function timeAgo(input: string | Date): string {
       );
     }
   }
-  return '';
+  return formatter.format(0, 'seconds');
 }

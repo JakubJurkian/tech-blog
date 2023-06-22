@@ -5,6 +5,7 @@ import SearchInput from '../components/SearchInput';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store/store';
 import { getPosts } from '../store/postsSlice';
+import timeAgo from '../util/timeAgo';
 
 const authorInfo: string[] = [
   'Jakub Jurkian',
@@ -47,7 +48,7 @@ function HomePage() {
         loadedPosts.push({
           id: key,
           author: data[key].author,
-          date: data[key].date,
+          date: timeAgo(data[key].date),
           img: data[key].img,
           text: data[key].text,
           title: data[key].title,
