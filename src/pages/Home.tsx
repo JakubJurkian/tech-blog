@@ -6,7 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store/store';
 import { getPosts } from '../store/postsSlice';
 import timeAgo from '../util/timeAgo';
-import Spinner from '../components/spinner';
+import Spinner from '../components/Spinner';
+import { date } from '../util/date';
 
 const authorInfo: string[] = [
   'Jakub Jurkian',
@@ -18,18 +19,20 @@ const authorInfo: string[] = [
 function HomePage() {
   const dispatch = useDispatch();
   const posts = useSelector((state: RootState) => state.posts.posts);
-  const postsAmount = useSelector((state: RootState) => state.posts.postsAmount);
-  
+  const postsAmount = useSelector(
+    (state: RootState) => state.posts.postsAmount
+  );
+
   let quantity;
   if (postsAmount === 1) {
-    quantity = <code>{postsAmount} post</code>
+    quantity = <code>{postsAmount} post</code>;
   } else {
-    quantity = <code>{postsAmount} posts</code>
+    quantity = <code>{postsAmount} posts</code>;
   }
-
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [query, setQuery] = useState('');
 
   const fetchPostsHandler = useCallback(async () => {
     setIsLoading(true);
@@ -50,13 +53,14 @@ function HomePage() {
           id: key,
           author: data[key].author,
           date: timeAgo(data[key].date),
+          addedXAgo: date(data[key].date),
           img: data[key].img,
           text: data[key].text,
           title: data[key].title,
-          description: data[key].description
+          description: data[key].description,
         });
       }
-    
+
       dispatch(getPosts(loadedPosts));
     } catch (error: any) {
       setError(error.message);
@@ -71,7 +75,10 @@ function HomePage() {
   let content = <p>Found no posts.</p>;
 
   if (posts.length > 0) {
-    content = <Posts posts={posts} />;
+    const filteredPosts = posts.filter((post) => {
+      return post.title.toLowerCase().includes(query.toLowerCase());
+    });
+    content = <Posts posts={filteredPosts} />;
   }
 
   if (error) {
@@ -79,7 +86,7 @@ function HomePage() {
   }
 
   if (isLoading) {
-    content = <Spinner />
+    content = <Spinner />;
   }
 
   return (
@@ -97,7 +104,10 @@ function HomePage() {
               <code>Posts</code>
               {quantity}
             </div>
-            <SearchInput />
+            <SearchInput
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
           </section>
           {content}
         </main>

@@ -4,6 +4,7 @@ interface Post {
   id: string;
   author: string;
   date: string;
+  addedXAgo: string;
   description: string;
   img: string;
   text: string;
