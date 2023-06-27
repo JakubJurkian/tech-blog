@@ -13,6 +13,11 @@ const Menu = (props: { onClickedElement(arg: boolean): void }) => {
     props.onClickedElement(true);
   }
 
+  function logoutHandler() {
+    props.onClickedElement(true);
+    dispatch(authLogout());
+  }
+
   const notLogged = (
     <>
       <li>
@@ -48,7 +53,7 @@ const Menu = (props: { onClickedElement(arg: boolean): void }) => {
         {/* <button className="menu-el w-full text-left" onClick={() => dispatch(logout())}>
           Logout
         </button> */}
-        <button className="menu-el w-full text-left" onClick={() => dispatch(authLogout())}>
+        <button className="menu-el w-full text-left" onClick={logoutHandler}>
           Logout
         </button>
       </li>

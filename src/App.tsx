@@ -9,7 +9,7 @@ import PostPage from './pages/Post';
 import NewPostPage from './pages/NewPost';
 import LoginPage from './pages/Login';
 import RegisterPage from './pages/Register';
-import AboutMePage from './pages/AboutMe';
+import MyProfilePage from './pages/MyProfile';
 import RootLayout from './pages/Root';
 
 const router = createBrowserRouter([
@@ -23,7 +23,7 @@ const router = createBrowserRouter([
       { path: 'login', element: <LoginPage /> },
       { path: 'posts/:postId', element: <PostPage /> },
       { path: 'create-new-post', element: <NewPostPage /> },
-      { path: 'about-me', element: <AboutMePage /> },
+      { path: 'about-me', element: <MyProfilePage /> },
     ],
   },
 ]);

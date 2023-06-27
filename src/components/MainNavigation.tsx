@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useAutoAnimate } from '@formkit/auto-animate/react'
 
 import classes from './MainNavigation.module.css';
 import Menu from './Menu.tsx';
 
 function App() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [transition] = useAutoAnimate()
 
   function isElementClicked(bool: boolean) {
     if (bool) setShowMobileMenu(false);
@@ -43,7 +45,7 @@ function App() {
             </svg>
           </button>
         </div>
-        <div className="md:hidden">
+        <div className="md:hidden" ref={transition}>
           {showMobileMenu && <Menu onClickedElement={isElementClicked} />}
         </div>
       </nav>

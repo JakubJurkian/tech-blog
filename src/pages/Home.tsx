@@ -1,13 +1,17 @@
 import { useCallback, useEffect, useState } from 'react';
-import AuthorCard from '../components/AuthorCard';
-import Posts from '../components/Posts';
-import SearchInput from '../components/SearchInput';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../store/store';
-import { getPosts } from '../store/postsSlice';
-import timeAgo from '../util/timeAgo';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
+
+import AuthorCard from '../components/AuthorCard';
+import SearchInput from '../components/SearchInput';
 import Spinner from '../components/Spinner';
+import Posts from '../components/Posts';
+
+import { RootState } from '../store/store';
+import { getPosts, howManyPosts } from '../store/postsSlice';
+
 import { date } from '../util/date';
+import timeAgo from '../util/timeAgo';
 
 const authorInfo: string[] = [
   'Jakub Jurkian',
@@ -17,6 +21,7 @@ const authorInfo: string[] = [
 ];
 
 function HomePage() {
+  const [transition] = useAutoAnimate();
   const dispatch = useDispatch();
   const posts = useSelector((state: RootState) => state.posts.posts);
   const postsAmount = useSelector(
@@ -25,9 +30,9 @@ function HomePage() {
 
   let quantity;
   if (postsAmount === 1) {
-    quantity = <code>{postsAmount} post</code>;
+    quantity = `${postsAmount} post`;
   } else {
-    quantity = <code>{postsAmount} posts</code>;
+    quantity = `${postsAmount} posts`;
   }
 
   const [isLoading, setIsLoading] = useState(false);
@@ -68,16 +73,22 @@ function HomePage() {
     setIsLoading(false);
   }, [dispatch]);
 
+  const filteredPosts = posts.filter((post) => {
+    return post.title.toLowerCase().includes(query.toLowerCase());
+  });
+
   useEffect(() => {
     fetchPostsHandler();
+    dispatch(howManyPosts(filteredPosts.length));
   }, []);
 
-  let content = <p>Found no posts.</p>;
+  useEffect(() => {
+    dispatch(howManyPosts(filteredPosts.length));
+  }, [dispatch, filteredPosts.length]);
 
-  if (posts.length > 0) {
-    const filteredPosts = posts.filter((post) => {
-      return post.title.toLowerCase().includes(query.toLowerCase());
-    });
+  let content = <p className="text-center text-lg">Found no posts :&#40;</p>;
+
+  if (filteredPosts.length > 0) {
     content = <Posts posts={filteredPosts} />;
   }
 
@@ -102,14 +113,14 @@ function HomePage() {
           <section>
             <div className="flex justify-between">
               <code>Posts</code>
-              {quantity}
+              <code>{quantity}</code>
             </div>
             <SearchInput
               value={query}
               onChange={(e) => setQuery(e.target.value)}
             />
           </section>
-          {content}
+          <div ref={transition}>{content}</div>
         </main>
       </div>
     </div>

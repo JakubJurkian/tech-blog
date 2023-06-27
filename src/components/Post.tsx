@@ -5,7 +5,7 @@ export default function Post(props: {
   img: string;
   text: string;
 }) {
-  window.scrollTo(0, 0);
+  window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
   return (
     <div className="flex flex-col w-[98%] max-w-screen-lg bg-[#04031c6e] rounded-2xl shadow-lg overflow-hidden">
       <div className="flex justify-between">

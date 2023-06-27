@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 import PostPreview from './PostPreview';
 import { howManyPosts } from '../store/postsSlice';
 import { useEffect } from 'react';
+import { useAutoAnimate } from '@formkit/auto-animate/react'
 
 interface Post {
   id: string;
@@ -19,11 +20,12 @@ function Posts(props: { posts: PostsArray}) {
   useEffect(() => {
     dispatch(howManyPosts(props.posts.length));
   }, [dispatch, props.posts.length]);
-  
+
+  const [transition] = useAutoAnimate();
 
   return (
     <section>
-      <ul className='flex flex-col gap-5'>
+      <ul className='flex flex-col gap-5' ref={transition}>
         {props.posts.map((post) => {
           return (
             <PostPreview
