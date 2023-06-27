@@ -1,25 +1,29 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { useAutoAnimate } from '@formkit/auto-animate/react'
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 
-import classes from './MainNavigation.module.css';
 import Menu from './Menu.tsx';
+import classes from './MainNavigation.module.css';
 
 function App() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
-  const [transition] = useAutoAnimate()
+  const [transition] = useAutoAnimate();
 
   function isElementClicked(bool: boolean) {
     if (bool) setShowMobileMenu(false);
   }
-  
+
   return (
     <header className={`${classes['nav-bg']} fixed top-0 w-full z-10`}>
       <nav className="shadow-lg">
         <div className="max-w-7xl mx-auto flex items-center justify-between h-16 px-4">
           <div>
             <NavLink to="/">
-              <img src="./home-34.svg" alt="home" className={`${classes['filter-white']}`}/>
+              <img
+                src="./home-34.svg"
+                alt="home"
+                className={`${classes['filter-white']}`}
+              />
             </NavLink>
           </div>
           <div className="hidden md:block">

@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-
 import { Provider } from 'react-redux';
+
 import store from './store/store';
 
 import ErrorPage from './pages/Error';
@@ -23,7 +23,7 @@ const router = createBrowserRouter([
       { path: 'login', element: <LoginPage /> },
       { path: 'posts/:postId', element: <PostPage /> },
       { path: 'create-new-post', element: <NewPostPage /> },
-      { path: 'about-me', element: <MyProfilePage /> },
+      { path: 'my-profile', element: <MyProfilePage />},
     ],
   },
 ]);

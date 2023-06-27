@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
-// import { logout } from '../store/slices/authSlice';
 import { RootState } from '../store/store';
 import { authLogout } from '../store/authSlice';
 
@@ -21,11 +20,6 @@ const Menu = (props: { onClickedElement(arg: boolean): void }) => {
   const notLogged = (
     <>
       <li>
-        <NavLink to="/about-me" className="menu-el" onClick={clickHandler}>
-          About me
-        </NavLink>
-      </li>
-      <li>
         <NavLink to="/register" className="menu-el" onClick={clickHandler}>
           Sign Up
         </NavLink>
@@ -36,11 +30,6 @@ const Menu = (props: { onClickedElement(arg: boolean): void }) => {
   const logged = (
     <>
       <li>
-        <NavLink to="/about-me" className="menu-el" onClick={clickHandler}>
-          About me
-        </NavLink>
-      </li>
-      <li>
         <NavLink
           to="/create-new-post"
           className="menu-el"
@@ -50,9 +39,11 @@ const Menu = (props: { onClickedElement(arg: boolean): void }) => {
         </NavLink>
       </li>
       <li>
-        {/* <button className="menu-el w-full text-left" onClick={() => dispatch(logout())}>
-          Logout
-        </button> */}
+        <NavLink to="/my-profile" className="menu-el" onClick={clickHandler}>
+          My profile
+        </NavLink>
+      </li>
+      <li>
         <button className="menu-el w-full text-left" onClick={logoutHandler}>
           Logout
         </button>

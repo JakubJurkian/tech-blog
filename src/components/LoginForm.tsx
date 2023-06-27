@@ -5,7 +5,8 @@ import useFormValidation from '../hooks/use-form-validation';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
 import { authSuccess } from '../store/authSlice';
-import Spinner from './spinner';
+import Spinner from './Spinner';
+import { updateEmail } from '../store/profileSlice';
 
 const LoginForm: React.FC = () => {
   const navigate = useNavigate();
@@ -42,7 +43,11 @@ const LoginForm: React.FC = () => {
       signInWithEmailAndPassword(auth, email, password)
         .then(() => {
           setIsLoading(false);
+
           dispatch(authSuccess({email, password}));
+          // dispatch(updateName(name));
+          dispatch(updateEmail(email));
+
           emailReset();
           passwordReset();
           navigate('/');

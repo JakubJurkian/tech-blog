@@ -5,7 +5,8 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
 import { useDispatch } from 'react-redux';
 import { authSuccess } from '../store/authSlice';
-import Spinner from './spinner';
+import Spinner from './Spinner';
+import { updateEmail, updateName } from '../store/profileSlice';
 
 const errorText = (value: string) => {
   if (value === 'confirmPassword') {
@@ -86,7 +87,11 @@ export default function RegisterForm() {
       createUserWithEmailAndPassword(auth, email, password)
         .then(() => {
           setIsLoading(false);
+
           dispatch(authSuccess({ email, password }));
+          dispatch(updateName(name));
+          dispatch(updateEmail(email));
+
           nameReset();
           emailReset();
           passwordReset();

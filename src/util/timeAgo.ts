@@ -1,6 +1,3 @@
-// console.log(timeAgo('2021-08-09T15:29:01+0000'));
-// console.log(timeAgo(new Date().toISOString()));
-
 export default function timeAgo(input: string | Date): string {
   const date = input instanceof Date ? input : new Date(input.replace(/\.\d+/, ''));
   const formatter = new Intl.RelativeTimeFormat('en', {numeric: 'auto'});
@@ -26,3 +23,6 @@ export default function timeAgo(input: string | Date): string {
   }
   return formatter.format(0, 'seconds');
 }
+
+// console.log(timeAgo('2021-08-09T15:29:01+0000'));
+// console.log(timeAgo(new Date().toISOString()));
