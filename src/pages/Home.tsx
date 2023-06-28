@@ -12,6 +12,7 @@ import { getPosts, howManyPosts } from '../store/postsSlice';
 
 import { date } from '../util/date';
 import timeAgo from '../util/timeAgo';
+import SkeletonLoading from '../components/SkeletonLoading';
 
 const authorInfo: string[] = [
   'Jakub Jurkian',
@@ -93,11 +94,16 @@ function HomePage() {
   }
 
   if (error) {
-    content = <p>{error}</p>;
+    content = <p className="text-center text-lg">{error}</p>;
   }
 
   if (isLoading) {
-    content = <Spinner />;
+    content = (
+      <div className='flex flex-col gap-5'>
+        <SkeletonLoading />
+        <SkeletonLoading />
+      </div>
+    );
   }
 
   return (
