@@ -44,7 +44,7 @@ function HomePage() {
     setError(null);
     try {
       const response = await fetch(
-        'https://tech-blog-posts-default-rtdb.europe-west1.firebasedatabase.app/posts.json'
+        'https://personal-tech-blog-development-default-rtdb.europe-west1.firebasedatabase.app/posts.json'
       );
       if (!response.ok) {
         throw new Error('Something went wrong!');
