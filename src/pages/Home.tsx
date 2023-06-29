@@ -4,7 +4,6 @@ import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 import AuthorCard from '../components/AuthorCard';
 import SearchInput from '../components/SearchInput';
-import Spinner from '../components/Spinner';
 import Posts from '../components/Posts';
 
 import { RootState } from '../store/store';
@@ -52,6 +51,8 @@ function HomePage() {
       }
 
       const data = await response.json();
+
+      //create a separate fetch component
 
       const loadedPosts = [];
       for (const key in data) {
