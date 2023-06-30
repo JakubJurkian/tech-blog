@@ -52,8 +52,6 @@ function HomePage() {
 
       const data = await response.json();
 
-      //create a separate fetch component
-
       const loadedPosts = [];
       for (const key in data) {
         loadedPosts.push({
