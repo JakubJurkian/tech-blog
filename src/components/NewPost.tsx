@@ -22,6 +22,7 @@ const NewPost = () => {
             >
               Create
             </button>
+            {/* modify new post design */}
         </form>
         </div>
     </div>
