@@ -9,7 +9,7 @@ export default function LoginPage() {
   const navigate = useNavigate();
   
   useEffect(() => {
-    if (!isLoggedIn) {
+    if (isLoggedIn) {
       navigate('/');
     }
   }, [isLoggedIn, navigate]);

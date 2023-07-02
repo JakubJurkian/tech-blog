@@ -2,11 +2,12 @@ import React, { ReactNode, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import useFormValidation from '../hooks/use-form-validation';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../firebase';
+import { auth, db } from '../firebase';
 import { useDispatch } from 'react-redux';
 import { authSuccess } from '../store/authSlice';
 import Spinner from './Spinner';
 import { updateEmail, updateName } from '../store/profileSlice';
+import { doc, setDoc } from 'firebase/firestore';
 
 const errorText = (value: string) => {
   if (value === 'confirmPassword') {
@@ -84,28 +85,32 @@ export default function RegisterForm() {
       password === confirmPassword
     ) {
       setIsLoading(true);
-      createUserWithEmailAndPassword(auth, email, password)
-        .then(() => {
-          setIsLoading(false);
-
-          dispatch(authSuccess({ email, password }));
-          dispatch(updateName(name));
-          dispatch(updateEmail(email));
-
-          nameReset();
-          emailReset();
-          passwordReset();
-          confirmPasswordReset();
-          navigate('/');
-        })
-        .catch(() => {
-          setIsLoading(false);
-          setErrorMessage(
-            <div className="text-center">
-              <p className="text-red-500 text-lg">This email already exists.</p>
-            </div>
-          );
+      try {
+        const res = await createUserWithEmailAndPassword(auth, email, password);
+        await setDoc(doc(db, "users", res.user.uid), {
+          name,
+          email,
+          password
         });
+        
+        setIsLoading(false);
+        dispatch(authSuccess({ name, email, password }));
+        dispatch(updateName(name));
+        dispatch(updateEmail(email));
+
+        nameReset();
+        emailReset();
+        passwordReset();
+        confirmPasswordReset();
+        navigate('/');
+      } catch (error) {
+        setIsLoading(false);
+        setErrorMessage(
+          <div className="text-center">
+            <p className="text-red-500 text-lg">This email already exists.</p>
+          </div>
+        );
+      }
     }
   };
 

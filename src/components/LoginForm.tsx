@@ -3,10 +3,12 @@ import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import useFormValidation from '../hooks/use-form-validation';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../firebase';
+import { auth, db } from '../firebase';
 import { authSuccess } from '../store/authSlice';
 import Spinner from './Spinner';
-import { updateEmail } from '../store/profileSlice';
+import { updateEmail, updateName } from '../store/profileSlice';
+
+import { doc, getDoc } from 'firebase/firestore';
 
 const LoginForm: React.FC = () => {
   const navigate = useNavigate();
@@ -35,27 +37,36 @@ const LoginForm: React.FC = () => {
     reset: passwordReset,
   } = useFormValidation(validateValue);
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-
     if (emailIsValid && passwordIsValid) {
       setIsLoading(true);
-      signInWithEmailAndPassword(auth, email, password)
-        .then(() => {
-          setIsLoading(false);
+      try {
+        const res = await signInWithEmailAndPassword(auth, email, password);
+        const userId = res.user.uid;
 
-          dispatch(authSuccess({email, password}));
-          // dispatch(updateName(name));
-          dispatch(updateEmail(email));
+        const docRef = doc(db, 'users', userId);
+        const docSnap = await getDoc(docRef);
+        const name = docSnap.data()?.name;
 
-          emailReset();
-          passwordReset();
-          navigate('/');
-        })
-        .catch(() => {
-          setIsLoading(false);
-          setErrorMessage(<div className='text-center'><p className='text-red-500 text-lg'>Your email or password is incorrect.</p></div>)
-        });
+        setIsLoading(false);
+        dispatch(authSuccess({ name, email, password }));
+        dispatch(updateName(name));
+        dispatch(updateEmail(email));
+
+        emailReset();
+        passwordReset();
+        navigate('/');
+      } catch (error) {
+        setIsLoading(false);
+        setErrorMessage(
+          <div className="text-center">
+            <p className="text-red-500 text-lg">
+              Your email or password is incorrect.
+            </p>
+          </div>
+        );
+      }
     }
   };
 
@@ -77,12 +88,16 @@ const LoginForm: React.FC = () => {
                 type="email"
                 name="email"
                 placeholder="name@email.com"
-                className={`form-input ${emailHasError ? 'form-input-error' : null}`}
+                className={`form-input ${
+                  emailHasError ? 'form-input-error' : null
+                }`}
                 onChange={emailChangeHandler}
                 onBlur={emailBlurHandler}
                 required
               />
-              {emailHasError && <p className='error-message'>Please enter a valid email.</p>}
+              {emailHasError && (
+                <p className="error-message">Please enter a valid email.</p>
+              )}
             </div>
             <div>
               <label htmlFor="password" className="form-label">
@@ -94,12 +109,16 @@ const LoginForm: React.FC = () => {
                 type="password"
                 name="password"
                 placeholder="••••••••"
-                className={`form-input ${passwordHasError ? 'form-input-error' : null}`}
+                className={`form-input ${
+                  passwordHasError ? 'form-input-error' : null
+                }`}
                 onChange={passwordChangeHandler}
                 onBlur={passwordBlurHandler}
                 required
               />
-              {passwordHasError && <p className='error-message'>Please enter a valid password.</p>}
+              {passwordHasError && (
+                <p className="error-message">Please enter a valid password.</p>
+              )}
             </div>
             {isLoading && <Spinner />}
             {errorMessage}
