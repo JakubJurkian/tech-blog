@@ -17,7 +17,6 @@ export default function Spinner() {
           fill="currentFill"
         />
       </svg>
-      <span className="mt-3">Loading...</span>
     </div>
   );
 }
