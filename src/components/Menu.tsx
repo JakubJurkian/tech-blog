@@ -3,10 +3,12 @@ import { NavLink } from 'react-router-dom';
 
 import { RootState } from '../store/store';
 import { authLogout } from '../store/authSlice';
+import { updateEmail, updateName } from '../store/profileSlice';
 
 const Menu = (props: { onClickedElement(arg: boolean): void }) => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
+  const email = useSelector((state: RootState) => state.profile.email);
 
   function clickHandler() {
     props.onClickedElement(true);
@@ -15,6 +17,8 @@ const Menu = (props: { onClickedElement(arg: boolean): void }) => {
   function logoutHandler() {
     props.onClickedElement(true);
     dispatch(authLogout());
+    dispatch(updateName(''));
+    dispatch(updateEmail(''));
   }
 
   const notLogged = (
@@ -29,15 +33,17 @@ const Menu = (props: { onClickedElement(arg: boolean): void }) => {
 
   const logged = (
     <>
-      <li>
-        <NavLink
-          to="/create-new-post"
-          className="menu-el"
-          onClick={clickHandler}
-        >
-          Create a new post
-        </NavLink>
-      </li>
+      {email === 'test@test.com' && (
+        <li>
+          <NavLink
+            to="/create-new-post"
+            className="menu-el"
+            onClick={clickHandler}
+          >
+            Create a new post
+          </NavLink>
+        </li>
+      )}
       <li>
         <NavLink to="/my-profile" className="menu-el" onClick={clickHandler}>
           My profile

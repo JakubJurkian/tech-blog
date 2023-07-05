@@ -6,13 +6,14 @@ import { useEffect } from "react";
 
 function NewPostPage() {
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
+  const email = useSelector((state: RootState) => state.profile.email);
   const navigate = useNavigate();
   
   useEffect(() => {
-    if (!isLoggedIn) {
+    if (!isLoggedIn || email !== 'test@test.com') {
       navigate('/');
     }
-  }, [isLoggedIn, navigate]);
+  }, [isLoggedIn, email, navigate]);
 
   return (
     <>

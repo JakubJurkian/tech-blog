@@ -40,7 +40,7 @@ const NewPost = () => {
       titleRef.current?.value
     ) {
       const post: Post = {
-        author: '',
+        author: 'Jakub Jurkian',
         date: new Date().toISOString(),
         description: descriptionRef.current?.value,
         img: imgUrlRef.current?.value,

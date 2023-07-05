@@ -92,7 +92,7 @@ export default function RegisterForm() {
           email,
           password
         });
-        
+
         setIsLoading(false);
         dispatch(authSuccess({ name, email, password }));
         dispatch(updateName(name));
