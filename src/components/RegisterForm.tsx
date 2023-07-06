@@ -1,13 +1,16 @@
 import React, { ReactNode, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import useFormValidation from '../hooks/use-form-validation';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth, db } from '../firebase';
 import { useDispatch } from 'react-redux';
+
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
+
+import { auth, db } from '../firebase';
+import useFormValidation from '../hooks/use-form-validation';
+import { updateEmail, updateName } from '../store/profileSlice';
 import { authSuccess } from '../store/authSlice';
 import Spinner from './Spinner';
-import { updateEmail, updateName } from '../store/profileSlice';
-import { doc, setDoc } from 'firebase/firestore';
+
 
 const errorText = (value: string) => {
   if (value === 'confirmPassword') {
@@ -117,9 +120,9 @@ export default function RegisterForm() {
 
   return (
     <>
-      <div className="flex flex-col items-center relative bottom-16 xxs:bottom-20 xs:bottom-28 s:bottom-36 sm:bottom-48 md:bottom-60 mx-auto px-3 md:h-screen lg:py-0">
+      <div className="flex flex-col items-center relative bottom-20 xxs:bottom-28 xs:bottom-36 s:bottom-44 sm:bottom-52 md:bottom-64 mx-auto s:px-5 md:h-screen lg:py-0">
         <div className="w-full rounded-lg shadow-md border md:mt-0 sm:max-w-lg xl:p-0 bg-gray-900 border-gray-700">
-          <div className="p-6 space-y-4 sm:p-8">
+          <div className="p-5 space-y-4 sm:p-8">
             <h1 className="text-2xl text-center font-bold tracking-tight md:text-2xl text-gray-300">
               Create an Account
             </h1>
@@ -234,7 +237,7 @@ export default function RegisterForm() {
               {errorMessage}
               <button
                 type="submit"
-                className="w-full text-white bg-[#2057cd] hover:bg-[#1d4ed8] focus:ring-2 focus:outline-none focus:ring-[#1e40af] font-medium rounded-lg text-base px-5 py-2.5 text-center"
+                className="w-full text-white bg-[#2057cd] hover:bg-[#1d4ed8] focus:ring-2 focus:outline-none focus:ring-[#1e40af] font-medium rounded-lg text-lg px-5 py-2.5 text-center"
               >
                 Create an account
               </button>

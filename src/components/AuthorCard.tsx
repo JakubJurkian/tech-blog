@@ -1,4 +1,3 @@
-
 function AuthorCard(props: {
   author: string;
   description: string;

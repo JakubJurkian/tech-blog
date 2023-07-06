@@ -13,8 +13,6 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_REACT_APP_FIREBASE_APP_ID,
 }
 
-//I'm doing this in this file because we can use these var. during development
-
 const app = initializeApp(firebaseConfig);
 
 export const storage = getStorage(app);

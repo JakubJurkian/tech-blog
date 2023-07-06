@@ -1,13 +1,14 @@
 import { useParams } from 'react-router-dom';
-import Post from '../components/Post';
 import { useSelector } from 'react-redux';
+
 import { RootState } from '../store/store';
+import Post from '../components/Post';
 
 function PostPage() {
   const { postId } = useParams();
   const posts = useSelector((state: RootState) => state.posts.posts);
   const post = posts.filter(post => post.id === postId);
-  console.log(post);
+
   return (
     <div className="flex justify-center relative bottom-20 xxs:bottom-24 xs:bottom-32 s:bottom-40 sm:bottom-48 md:bottom-56">
       <Post

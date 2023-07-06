@@ -4,7 +4,6 @@ interface ProfileState {
   name: string;
   email: string;
   avatarUrl: string;
-  // Add any additional profile data properties
 }
 
 const initialState: ProfileState = {

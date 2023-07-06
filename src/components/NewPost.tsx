@@ -54,6 +54,7 @@ const NewPost = () => {
   return (
     <div className="flex flex-col items-center relative bottom-16 xxs:bottom-20 xs:bottom-28 s:bottom-36 sm:bottom-48 md:bottom-60 mx-auto px-3 md:h-screen lg:py-0">
       <div className="bg-gray-900 p-6 rounded-lg shadow-lg w-full xs:w-[430px]">
+        <h1 className='text-2xl text-center'>Create a new post</h1>
         <form className="flex flex-col" onSubmit={handleSubmit}>
           <label htmlFor="title" className="form-label">
             Title

@@ -1,12 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../store/store';
-import { db, storage } from '../firebase';
-import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
-import { updateAvatar } from '../store/profileSlice';
-import { doc, setDoc, getDoc } from 'firebase/firestore';
-import guestUser from '/guest-user.png';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
+
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
+import { doc, setDoc, getDoc } from 'firebase/firestore';
+
+import { db, storage } from '../firebase';
+import { RootState } from '../store/store';
+import { updateAvatar } from '../store/profileSlice';
+import guestUser from '/guest-user.png';
 
 const MyProfilePage: React.FC = () => {
   const [transition] = useAutoAnimate();
@@ -108,8 +110,8 @@ const MyProfilePage: React.FC = () => {
   }
 
   return (
-    <div className="flex flex-col place-items-center">
-      <h2 className="text-2xl self-center">My Profile</h2>
+    <div className="flex flex-col place-items-center py-3">
+      <h2 className="text-3xl self-center mb-4">My Profile</h2>
       <form
         onSubmit={handleSubmit}
         className="flex flex-col place-items-center"
@@ -126,15 +128,19 @@ const MyProfilePage: React.FC = () => {
           ref={fileInputRef}
         />
         <button
-          className="bg-blue-400 my-3 w-1/2 p-1 rounded-md disabled:bg-gray-500 disabled:cursor-not-allowed"
+          className="bg-blue-400 my-3 w-3/4 xs:w-10/12 p-1 text-lg rounded-md disabled:bg-gray-500 disabled:cursor-not-allowed"
           disabled={percentage !== null && percentage < 100}
         >
-          Upload
+          {avatarUrl ? 'Change image' : 'Upload Image'}
         </button>
       </form>
-      <div className="w-52" ref={transition}>{content}</div>
-      <p>Name: {name}</p>
-      <p>Email: {email}</p>
+      <div className='sm:flex gap-8'>
+        <div className="w-56" ref={transition}>{content}</div>
+        <div className='mt-2 text-lg self-center'>
+          <p>Name: <span className='text-slate-300 underline'>{name}</span></p>
+          <p>Email: <span className='text-slate-300 underline'>{email}</span></p>
+        </div>
+      </div>
     </div>
   );
 };

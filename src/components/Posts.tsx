@@ -1,8 +1,9 @@
-import { useDispatch } from 'react-redux';
-import PostPreview from './PostPreview';
-import { howManyPosts } from '../store/postsSlice';
 import { useEffect } from 'react';
-import { useAutoAnimate } from '@formkit/auto-animate/react'
+import { useDispatch } from 'react-redux';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
+
+import { howManyPosts } from '../store/postsSlice';
+import PostPreview from './PostPreview';
 
 interface Post {
   id: string;
@@ -15,7 +16,7 @@ interface Post {
 }
 type PostsArray = Post[];
 
-function Posts(props: { posts: PostsArray}) {
+function Posts(props: { posts: PostsArray }) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(howManyPosts(props.posts.length));
@@ -25,7 +26,7 @@ function Posts(props: { posts: PostsArray}) {
 
   return (
     <section>
-      <ul className='flex flex-col gap-5' ref={transition}>
+      <ul className="flex flex-col gap-5" ref={transition}>
         {props.posts.map((post) => {
           return (
             <PostPreview

@@ -2,9 +2,9 @@ import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 
+import Posts from '../components/Posts';
 import AuthorCard from '../components/AuthorCard';
 import SearchInput from '../components/SearchInput';
-import Posts from '../components/Posts';
 
 import { RootState } from '../store/store';
 import { getPosts, howManyPosts } from '../store/postsSlice';

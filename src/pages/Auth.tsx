@@ -1,4 +1,4 @@
-import Signup from "../components/RegisterForm";
+import Signup from '../components/RegisterForm';
 
 function AuthPage() {
   return (
