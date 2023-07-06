@@ -45,12 +45,13 @@ const LoginForm: React.FC = () => {
         const res = await signInWithEmailAndPassword(auth, email, password);
         const userId = res.user.uid;
 
+
         const docRef = doc(db, 'users', userId);
         const docSnap = await getDoc(docRef);
         const name = docSnap.data()?.name;
 
         setIsLoading(false);
-        dispatch(authSuccess({ name, email, password }));
+        dispatch(authSuccess({ name, email, password, uid: userId }));
         dispatch(updateName(name));
         dispatch(updateEmail(email));
 

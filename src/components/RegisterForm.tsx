@@ -87,14 +87,15 @@ export default function RegisterForm() {
       setIsLoading(true);
       try {
         const res = await createUserWithEmailAndPassword(auth, email, password);
-        await setDoc(doc(db, "users", res.user.uid), {
+        const userId = res.user.uid;
+        await setDoc(doc(db, "users", userId), {
           name,
           email,
           password
         });
 
         setIsLoading(false);
-        dispatch(authSuccess({ name, email, password }));
+        dispatch(authSuccess({ name, email, password, uid: userId }));
         dispatch(updateName(name));
         dispatch(updateEmail(email));
 
