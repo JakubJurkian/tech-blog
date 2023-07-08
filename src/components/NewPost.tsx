@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface Post {
   author: string;
@@ -14,6 +15,7 @@ const NewPost = () => {
   const imgUrlRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
   const textRef = useRef<HTMLTextAreaElement>(null);
+  const navigate = useNavigate();
 
   async function createPostHandler(post: Post) {
     const response = await fetch(
@@ -48,6 +50,7 @@ const NewPost = () => {
         title: titleRef.current?.value,
       };
       createPostHandler(post);
+      navigate('/');
     }
   };
 

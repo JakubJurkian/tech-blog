@@ -8,6 +8,7 @@ import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { db, storage } from '../firebase';
 import { RootState } from '../store/store';
 import { updateAvatar } from '../store/profileSlice';
+
 import guestUser from '/guest-user.png';
 
 const MyProfilePage: React.FC = () => {
@@ -82,10 +83,10 @@ const MyProfilePage: React.FC = () => {
   };
 
   let content;
-  if (!isLoading) {
+  if (!isLoading && avatarUrl) {
     content = (
       <img
-        src={avatarUrl ? avatarUrl : guestUser}
+        src={avatarUrl}
         alt="user image"
         className="rounded-3xl"
       />
