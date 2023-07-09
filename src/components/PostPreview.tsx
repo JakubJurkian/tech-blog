@@ -9,7 +9,7 @@ function PostPreview(props: {
 }) {
   return (
     <Link to={`/posts/${props.link}`}>
-      <div className="flex flex-col gap-5 p-6 bg-[#141b2b] border-[1px] border-[#1c2f41] rounded-xl shadow-lg">
+      <div className="flex flex-col gap-5 p-6 bg-[#141b2b] hover:bg-[#171f32] smooth-transition-effect border-[1px] border-[#1c2f41] rounded-xl shadow-lg">
         <header className="flex justify-between">
           <h2 className='text-xl'>{props.title}</h2>
           <small className='self-center'>{props.date}</small>

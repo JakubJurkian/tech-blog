@@ -11,15 +11,15 @@ import { updateEmail, updateName } from '../store/profileSlice';
 import useFormValidation from '../hooks/use-form-validation';
 import Spinner from './Spinner';
 
+const validateValue = (value: string) => {
+  return value.trim() !== '' && value.length < 50;
+};
 
 const LoginForm: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [errorMessage, setErrorMessage] = useState<ReactNode | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const validateValue = (value: string) => {
-    return value.trim() !== '' && value.length < 50;
-  };
 
   const {
     value: email,
@@ -46,7 +46,6 @@ const LoginForm: React.FC = () => {
       try {
         const res = await signInWithEmailAndPassword(auth, email, password);
         const userId = res.user.uid;
-
 
         const docRef = doc(db, 'users', userId);
         const docSnap = await getDoc(docRef);
@@ -91,7 +90,7 @@ const LoginForm: React.FC = () => {
                 type="email"
                 name="email"
                 placeholder="name@email.com"
-                className={`form-input ${
+                className={`form-input smooth-transition-effect ${
                   emailHasError ? 'form-input-error' : null
                 }`}
                 onChange={emailChangeHandler}
@@ -112,7 +111,7 @@ const LoginForm: React.FC = () => {
                 type="password"
                 name="password"
                 placeholder="••••••••"
-                className={`form-input ${
+                className={`form-input smooth-transition-effect ${
                   passwordHasError ? 'form-input-error' : null
                 }`}
                 onChange={passwordChangeHandler}
@@ -127,7 +126,7 @@ const LoginForm: React.FC = () => {
             {errorMessage}
             <button
               type="submit"
-              className="w-full text-white bg-[#2057cd] hover:bg-[#1d4ed8] focus:ring-2 focus:outline-none focus:ring-[#1e40af] font-medium rounded-lg text-base px-5 py-2.5 text-center"
+              className="w-full text-white bg-blue-600 hover:bg-blue-500 smooth-transition-effect focus:ring-2 focus:outline-none focus:ring-[#1e40af] font-medium rounded-lg text-base px-5 py-2.5 text-center"
             >
               Login
             </button>

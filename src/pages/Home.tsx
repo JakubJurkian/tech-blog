@@ -23,6 +23,9 @@ const authorInfo: string[] = [
 function HomePage() {
   const [transition] = useAutoAnimate();
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [query, setQuery] = useState('');
   const posts = useSelector((state: RootState) => state.posts.posts);
   const postsAmount = useSelector(
     (state: RootState) => state.posts.postsAmount
@@ -34,10 +37,6 @@ function HomePage() {
   } else {
     quantity = `${postsAmount} posts`;
   }
-
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [query, setQuery] = useState('');
 
   const fetchPostsHandler = useCallback(async () => {
     setIsLoading(true);

@@ -18,6 +18,9 @@
   .error-message {
     @apply mt-2 text-red-500;
   }
+  .smooth-transition-effect {
+    @apply transition duration-300 ease-in-out;
+  }
 }
 
 :root {

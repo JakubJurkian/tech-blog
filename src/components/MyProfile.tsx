@@ -83,10 +83,10 @@ const MyProfilePage: React.FC = () => {
   };
 
   let content;
-  if (!isLoading && avatarUrl) {
+  if (!isLoading) {
     content = (
       <img
-        src={avatarUrl}
+        src={avatarUrl ? avatarUrl : guestUser}
         alt="user image"
         className="rounded-3xl"
       />
@@ -127,19 +127,26 @@ const MyProfilePage: React.FC = () => {
             }
           }}
           ref={fileInputRef}
+          className="rounded-md border-2 file:bg-blue-500 file:rounded-e-md file:mr-3 file:p-1 file:cursor-pointer file:border-none file:hover:bg-blue-400 file:smooth-transition-effect"
         />
         <button
-          className="bg-blue-400 my-3 w-3/4 xs:w-10/12 p-1 text-lg rounded-md disabled:bg-gray-500 disabled:cursor-not-allowed"
+          className="bg-blue-500 hover:bg-blue-400 my-4 w-3/4 xs:w-10/12 p-1 text-lg rounded-md disabled:bg-gray-500 disabled:cursor-not-allowed smooth-transition-effect"
           disabled={percentage !== null && percentage < 100}
         >
           {avatarUrl ? 'Change image' : 'Upload Image'}
         </button>
       </form>
-      <div className='sm:flex gap-8'>
-        <div className="w-56" ref={transition}>{content}</div>
-        <div className='mt-2 text-lg self-center'>
-          <p>Name: <span className='text-slate-300 underline'>{name}</span></p>
-          <p>Email: <span className='text-slate-300 underline'>{email}</span></p>
+      <div className="sm:flex gap-8">
+        <div className="w-56" ref={transition}>
+          {content}
+        </div>
+        <div className="mt-2 text-lg self-center">
+          <p>
+            Name: <span className="text-slate-300 underline">{name}</span>
+          </p>
+          <p>
+            Email: <span className="text-slate-300 underline">{email}</span>
+          </p>
         </div>
       </div>
     </div>

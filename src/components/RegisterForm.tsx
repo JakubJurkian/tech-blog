@@ -9,8 +9,8 @@ import { auth, db } from '../firebase';
 import useFormValidation from '../hooks/use-form-validation';
 import { updateEmail, updateName } from '../store/profileSlice';
 import { authSuccess } from '../store/authSlice';
+import PasswordRequirements from './PasswordRequirements';
 import Spinner from './Spinner';
-
 
 const errorText = (value: string) => {
   if (value === 'confirmPassword') {
@@ -26,18 +26,22 @@ export default function RegisterForm() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const validateName = (value: string) => {
     return value.trim() !== '';
   };
+
   const validateEmail = (value: string) => {
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     return emailRegex.test(value);
   };
+
   const validatePassword = (value: string) => {
     const passwordRegex =
       /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
     return passwordRegex.test(value);
   };
+
   const validateConfirmPassword = (value: string) => {
     return value === password;
   };
@@ -139,7 +143,7 @@ export default function RegisterForm() {
                   type="text"
                   name="name"
                   placeholder="Your Name"
-                  className={`form-input ${
+                  className={`form-input smooth-transition-effect ${
                     nameHasError ? 'form-input-error' : null
                   }`}
                   required
@@ -158,7 +162,7 @@ export default function RegisterForm() {
                   type="email"
                   name="email"
                   placeholder="name@email.com"
-                  className={`form-input ${
+                  className={`form-input smooth-transition-effect ${
                     emailHasError ? 'form-input-error' : null
                   }`}
                   required
@@ -177,20 +181,13 @@ export default function RegisterForm() {
                   type="password"
                   name="password"
                   placeholder="••••••••"
-                  className={`form-input ${
+                  className={`form-input smooth-transition-effect ${
                     passwordHasError ? 'form-input-error' : null
                   }`}
                   required
                 />
                 {passwordHasError && errorText('password')}
-                <ul className="bg-slate-700 rounded-lg p-2 mr-6 mt-2 w-3/4 text text-xs">
-                  <span>Password should contain at least: </span>
-                  <li>- 6 characters</li>
-                  <li>- one uppercase</li>
-                  <li>- one lowercase letter</li>
-                  <li>- one digit</li>
-                  <li>- one special character</li>
-                </ul>
+                <PasswordRequirements />
               </div>
               <div>
                 <label htmlFor="confirm-password" className="form-label">
@@ -204,7 +201,7 @@ export default function RegisterForm() {
                   type="password"
                   name="confirm-password"
                   placeholder="••••••••"
-                  className={`form-input ${
+                  className={`form-input smooth-transition-effect ${
                     confirmPasswordHasError ? 'form-input-error' : null
                   }`}
                   required
@@ -237,7 +234,7 @@ export default function RegisterForm() {
               {errorMessage}
               <button
                 type="submit"
-                className="w-full text-white bg-[#2057cd] hover:bg-[#1d4ed8] focus:ring-2 focus:outline-none focus:ring-[#1e40af] font-medium rounded-lg text-lg px-5 py-2.5 text-center"
+                className="w-full text-white bg-blue-600 hover:bg-blue-500 smooth-transition-effect focus:ring-2 focus:outline-none focus:ring-[#1e40af] font-medium rounded-lg text-lg px-5 py-2.5 text-center"
               >
                 Create an account
               </button>

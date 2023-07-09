@@ -63,13 +63,13 @@ const NewPost = () => {
             Title
           </label>
           <input type="text" id="title" className="form-input" ref={titleRef} />
-          <label htmlFor="image" className="form-label">
+          <label htmlFor="image" className="form-label smooth-transition-effect">
             ImageURL
           </label>
           <input
             type="text"
             id="image"
-            className="form-input"
+            className="form-input smooth-transition-effect"
             ref={imgUrlRef}
           />
           <label htmlFor="" className="form-label">
@@ -77,16 +77,16 @@ const NewPost = () => {
           </label>
           <textarea
             id="description"
-            className="form-input"
+            className="form-input smooth-transition-effect"
             ref={descriptionRef}
           />
           <label htmlFor="" className="form-label">
             Text
           </label>
-          <textarea id="text" className="form-input" ref={textRef} />
+          <textarea id="text" className="form-input smooth-transition-effect" ref={textRef} />
           <button
             type="submit"
-            className="w-full mt-5 text-white bg-[#2057cd] hover:bg-[#1d4ed8] focus:ring-2 focus:outline-none focus:ring-[#1e40af] font-medium rounded-lg text-base px-5 py-2.5 text-center"
+            className="w-full mt-5 text-white bg-blue-600 hover:bg-blue-500 smooth-transition-effect focus:ring-2 focus:outline-none focus:ring-[#1e40af] font-medium rounded-lg text-base px-5 py-2.5 text-center"
           >
             Create
           </button>
