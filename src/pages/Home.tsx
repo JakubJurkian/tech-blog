@@ -79,7 +79,7 @@ function HomePage() {
   useEffect(() => {
     fetchPostsHandler();
     dispatch(howManyPosts(filteredPosts.length));
-  }, []);
+  }, [fetchPostsHandler, dispatch, filteredPosts.length]);
 
   useEffect(() => {
     dispatch(howManyPosts(filteredPosts.length));

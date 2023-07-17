@@ -24,15 +24,16 @@ const MyProfilePage: React.FC = () => {
   useEffect(() => {
     async function getAvatar() {
       setIsLoading(true);
-      const docRef = doc(db, 'users', uid);
-      const docSnap = await getDoc(docRef);
-
-      if (docSnap.exists()) {
-        dispatch(updateAvatar(docSnap.data().avatar));
-        setIsLoading(false);
-      } else {
-        console.log('No such document!');
-        setIsLoading(false);
+      if (uid) {
+        const docRef = doc(db, 'users', uid);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          dispatch(updateAvatar(docSnap.data().avatar));
+          setIsLoading(false);
+        } else {
+          console.log('No such document!');
+          setIsLoading(false);
+        }
       }
     }
     getAvatar();
@@ -64,10 +65,12 @@ const MyProfilePage: React.FC = () => {
           },
           () => {
             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-              const ref = doc(db, 'users', uid);
-              setDoc(ref, { avatar: downloadURL }, { merge: true });
-              dispatch(updateAvatar(downloadURL));
-              setIsLoading(false);
+              if (uid) {
+                const ref = doc(db, 'users', uid);
+                setDoc(ref, { avatar: downloadURL }, { merge: true });
+                dispatch(updateAvatar(downloadURL));
+                setIsLoading(false);
+              }
             });
           }
         );

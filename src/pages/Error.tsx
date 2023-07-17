@@ -4,7 +4,7 @@ import MainNavigation from '../components/MainNavigation';
 import BackgroundImg from '../components/BackgroundImg';
 
 const ErrorPage = () => {
-  const error = useRouteError();
+  const error: any = useRouteError();
   console.log(error);
 
   let title = 'An error occured!';
