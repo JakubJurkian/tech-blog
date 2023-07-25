@@ -98,9 +98,9 @@ const MyProfilePage: React.FC = () => {
   if (isLoading) {
     content = (
       <div role="status" className="animate-pulse">
-        <div className="flex items-center justify-center h-56 lg:h-[476px] my-2 bg-gray-300 rounded-3xl dark:bg-gray-700">
+        <div className="flex items-center justify-center h-56 lg:h-[476px] my-2 rounded-3xl bg-gray-700">
           <svg
-            className="w-12 text-gray-200 dark:text-gray-600"
+            className="w-12 text-gray-600"
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"
             fill="currentColor"

@@ -130,7 +130,7 @@ const LoginForm: React.FC = () => {
             >
               Login
             </button>
-            <p className="text-sm text-gray-500 dark:text-gray-300">
+            <p className="text-sm text-gray-300">
               Don't have an account?{' '}
               <Link
                 to="/register"
