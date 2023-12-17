@@ -20,7 +20,7 @@ const NewPost = () => {
   const navigate = useNavigate();
 
   async function createPostHandler(post: Post) {
-    const response = await fetch(
+    await fetch(
       'https://personal-tech-blog-development-default-rtdb.europe-west1.firebasedatabase.app/posts.json',
       {
         method: 'POST',
@@ -30,14 +30,10 @@ const NewPost = () => {
         },
       }
     );
-    const data = await response.json();
-    console.log(data);
   }
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-
-    console.log(textRef.current?.querySelector('.ql-editor')?.innerHTML)
 
     if (
       descriptionRef.current?.value &&
@@ -68,7 +64,6 @@ const NewPost = () => {
             <label htmlFor="" className="form-label">
               Text
             </label>
-            {/* <textarea id="text" className="form-input smooth-transition-effect" ref={textRef} /> */}
             <TextEditor placeholder="Write Something..." ref={textRef}/>
           <label htmlFor="title" className="form-label">
             Title

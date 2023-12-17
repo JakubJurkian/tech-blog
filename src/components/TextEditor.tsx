@@ -19,8 +19,8 @@ const TextEditor = React.forwardRef<HTMLDivElement, TextEditorProps>((props, ref
         theme={'snow'}
         onChange={handleChange}
         value={editorHtml}
-        modules={TextEditor.modules}
-        formats={TextEditor.formats}
+        modules={modules}
+        formats={formats}
         bounds={'.app'}
         placeholder={props.placeholder}
         className="bg-white text-black"
@@ -29,21 +29,21 @@ const TextEditor = React.forwardRef<HTMLDivElement, TextEditorProps>((props, ref
   );
 });
 
-TextEditor.modules = {
-    toolbar: [
-      [{size: []}],
-      [{ 'font': [] }],
-      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-      [{'list': 'ordered'}, {'indent': '+1'}],
-      ['image', 'video'],
-      ['clean']
-    ],
-    clipboard: {
-      matchVisual: false,
-    }
+const modules = {
+  toolbar: [
+    [{size: []}],
+    [{ 'font': [] }],
+    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+    [{'list': 'ordered'}, {'indent': '+1'}],
+    ['image', 'video'],
+    ['clean']
+  ],
+  clipboard: {
+    matchVisual: false,
+  }
 };
 
-TextEditor.formats = [
+const formats = [
     'header', 'font', 'size',
     'bold', 'italic', 'underline', 'strike', 'blockquote',
     'list', 'bullet', 'indent',

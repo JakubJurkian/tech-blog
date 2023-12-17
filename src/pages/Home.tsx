@@ -16,7 +16,7 @@ import SkeletonLoading from '../components/SkeletonLoading';
 const authorInfo: string[] = [
   'Jakub Jurkian',
   "Welcome to my blog post! If you are into tech-related topics, you couldn't find a better place.",
-  './me.jpg',
+  './me.webp',
   'https://github.com/JakubJurkian',
 ];
 
@@ -103,10 +103,6 @@ function HomePage() {
       </div>
     );
   }
-  console.log("executed");
-  setTimeout(() => {
-    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
-  }, 300);
 
   return (
     <div className="flex flex-col relative">

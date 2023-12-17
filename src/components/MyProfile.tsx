@@ -130,7 +130,7 @@ const MyProfilePage: React.FC = () => {
             }
           }}
           ref={fileInputRef}
-          className="rounded-md border-2 file:bg-blue-500 file:rounded-e-md file:mr-3 file:p-1 file:cursor-pointer file:border-none file:hover:bg-blue-400 file:smooth-transition-effect"
+          className="rounded-md border-2 mx-4 file:bg-blue-500 file:rounded-e-md file:mr-3 file:p-1 file:cursor-pointer file:border-none file:hover:bg-blue-400 file:smooth-transition-effect"
         />
         <button
           className="bg-blue-500 hover:bg-blue-400 my-4 w-3/4 xs:w-10/12 p-1 text-lg rounded-md disabled:bg-gray-500 disabled:cursor-not-allowed smooth-transition-effect"
