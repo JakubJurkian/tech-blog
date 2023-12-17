@@ -72,6 +72,9 @@ const LoginForm: React.FC = () => {
     }
   };
 
+  setTimeout(() => {
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+  }, 300);
   return (
     <div className="flex flex-col items-center relative bottom-20 xxs:bottom-24 xs:bottom-32 s:bottom-36 sm:bottom-52 md:bottom-60 mx-auto xs:px-5 md:h-screen lg:py-0">
       <div className="w-full rounded-lg shadow-md border md:mt-0 sm:max-w-lg xl:p-0 bg-gray-900 border-gray-700">

@@ -145,10 +145,10 @@ const MyProfilePage: React.FC = () => {
         </div>
         <div className="mt-2 text-lg self-center">
           <p>
-            Name: <span className="text-slate-300 underline">{name}</span>
+            Name: <span className="text-slate-300">{name}</span>
           </p>
           <p>
-            Email: <span className="text-slate-300 underline">{email}</span>
+            Email: <span className="text-slate-300">{email}</span>
           </p>
         </div>
       </div>

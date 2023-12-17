@@ -103,6 +103,10 @@ function HomePage() {
       </div>
     );
   }
+  console.log("executed");
+  setTimeout(() => {
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+  }, 300);
 
   return (
     <div className="flex flex-col relative">
