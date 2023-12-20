@@ -18,7 +18,7 @@ function App() {
       <nav className="shadow-lg">
         <div className="max-w-7xl mx-auto flex items-center justify-between h-16 px-4">
           <div>
-            <NavLink to="/">
+            <NavLink to="/" onClick={() => window.scrollTo({top: 0, left: 0, behavior: 'smooth'})}>
               <img
                 src="./home-34.svg"
                 alt="home"
@@ -31,6 +31,7 @@ function App() {
           </div>
           <button
             type="button"
+            aria-label="menu"
             className="md:hidden bg-gray-900 p-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white transition duration-150 ease-in-out"
             onClick={() => setShowMobileMenu(!showMobileMenu)}
           >
