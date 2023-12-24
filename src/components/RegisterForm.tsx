@@ -122,6 +122,9 @@ export default function RegisterForm() {
     }
   };
 
+  setTimeout(() => {
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+  }, 300);
   return (
     <>
       <div className="flex flex-col items-center relative bottom-20 xxs:bottom-28 xs:bottom-36 s:bottom-44 sm:bottom-52 md:bottom-64 mx-auto s:px-5 md:h-screen lg:py-0">

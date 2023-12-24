@@ -16,7 +16,7 @@ import SkeletonLoading from '../components/SkeletonLoading';
 const authorInfo: string[] = [
   'Jakub Jurkian',
   "Welcome to my blog post! If you are into tech-related topics, you couldn't find a better place.",
-  './me.jpg',
+  './me.webp',
   'https://github.com/JakubJurkian',
 ];
 

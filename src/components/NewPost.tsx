@@ -1,12 +1,14 @@
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import TextEditor from './TextEditor';
 
 interface Post {
   author: string;
   date: string;
   description: string;
   img: string;
-  text: string;
+  text: string | undefined;
   title: string;
 }
 
@@ -14,11 +16,11 @@ const NewPost = () => {
   const titleRef = useRef<HTMLInputElement>(null);
   const imgUrlRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
-  const textRef = useRef<HTMLTextAreaElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
   async function createPostHandler(post: Post) {
-    const response = await fetch(
+    await fetch(
       'https://personal-tech-blog-development-default-rtdb.europe-west1.firebasedatabase.app/posts.json',
       {
         method: 'POST',
@@ -28,8 +30,6 @@ const NewPost = () => {
         },
       }
     );
-    const data = await response.json();
-    console.log(data);
   }
 
   const handleSubmit = (event: React.FormEvent) => {
@@ -38,7 +38,7 @@ const NewPost = () => {
     if (
       descriptionRef.current?.value &&
       imgUrlRef.current?.value &&
-      textRef.current?.value &&
+      textRef.current?.querySelector('.ql-editor')?.innerHTML &&
       titleRef.current?.value
     ) {
       const post: Post = {
@@ -46,7 +46,7 @@ const NewPost = () => {
         date: new Date().toISOString(),
         description: descriptionRef.current?.value,
         img: imgUrlRef.current?.value,
-        text: textRef.current?.value,
+        text: textRef.current?.querySelector('.ql-editor')?.innerHTML,
         title: titleRef.current?.value,
       };
       createPostHandler(post);
@@ -54,11 +54,17 @@ const NewPost = () => {
     }
   };
 
+  
+
   return (
     <div className="flex flex-col items-center relative bottom-16 xxs:bottom-20 xs:bottom-28 s:bottom-36 sm:bottom-48 md:bottom-60 mx-auto px-3 md:h-screen lg:py-0">
-      <div className="bg-gray-900 p-6 rounded-lg shadow-lg w-full xs:w-[430px]">
+      <div className="bg-gray-900 p-6 rounded-lg shadow-lg w-full xs:w-[430px] sm:w-[600px]">
         <h1 className='text-2xl text-center'>Create a new post</h1>
         <form className="flex flex-col" onSubmit={handleSubmit}>
+            <label htmlFor="" className="form-label">
+              Text
+            </label>
+            <TextEditor placeholder="Write Something..." ref={textRef}/>
           <label htmlFor="title" className="form-label">
             Title
           </label>
@@ -72,7 +78,7 @@ const NewPost = () => {
             className="form-input smooth-transition-effect"
             ref={imgUrlRef}
           />
-          <label htmlFor="" className="form-label">
+          <label htmlFor="description" className="form-label">
             Description
           </label>
           <textarea
@@ -80,18 +86,16 @@ const NewPost = () => {
             className="form-input smooth-transition-effect"
             ref={descriptionRef}
           />
-          <label htmlFor="" className="form-label">
-            Text
-          </label>
-          <textarea id="text" className="form-input smooth-transition-effect" ref={textRef} />
           <button
             type="submit"
-            className="w-full mt-5 text-white bg-blue-600 hover:bg-blue-500 smooth-transition-effect focus:ring-2 focus:outline-none focus:ring-[#1e40af] font-medium rounded-lg text-base px-5 py-2.5 text-center"
+            className="w-full mt-6 text-white bg-blue-600 hover:bg-blue-500 smooth-transition-effect focus:ring-2 focus:outline-none focus:ring-[#1e40af] font-medium rounded-lg text-base px-5 py-2.5 text-center"
           >
             Create
           </button>
         </form>
       </div>
+      
+      
     </div>
   );
 };
