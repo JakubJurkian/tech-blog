@@ -52,7 +52,7 @@ const LoginForm: React.FC = () => {
         const name = docSnap.data()?.name;
 
         setIsLoading(false);
-        dispatch(authSuccess({ name, email, password, uid: userId }));
+        dispatch(authSuccess({ name, email, uid: userId }));
         dispatch(updateName(name));
         dispatch(updateEmail(email));
 
@@ -73,13 +73,14 @@ const LoginForm: React.FC = () => {
   };
 
   setTimeout(() => {
-    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   }, 300);
+  
   return (
-    <div className="flex flex-col items-center relative bottom-20 xxs:bottom-24 xs:bottom-32 s:bottom-36 sm:bottom-52 md:bottom-60 mx-auto xs:px-5 md:h-screen lg:py-0">
-      <div className="w-full rounded-lg shadow-md border md:mt-0 sm:max-w-lg xl:p-0 bg-gray-900 border-gray-700">
-        <div className="p-5 space-y-4 sm:p-8">
-          <h1 className="text-2xl text-center font-bold tracking-tight md:text-2xl text-gray-300">
+    <div className="flex flex-col items-center relative bottom-20 smallMobile:bottom-24 mobile:bottom-32 small:bottom-36 medium:bottom-52 tablet:bottom-60 mx-auto mobile:px-5 tablet:h-screen desktop:py-0">
+      <div className="w-full rounded-lg shadow-md border tablet:mt-0 medium:max-w-lg desktop:p-0 bg-gray-900 border-gray-700">
+        <div className="p-5 space-y-4 medium:p-8">
+          <h1 className="text-2xl text-center font-bold tracking-tight tablet:text-2xl text-gray-300">
             Login
           </h1>
           <form className="space-y-4" action="#" onSubmit={handleSubmit}>

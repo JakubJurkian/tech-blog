@@ -102,7 +102,7 @@ export default function RegisterForm() {
         });
 
         setIsLoading(false);
-        dispatch(authSuccess({ name, email, password, uid: userId }));
+        dispatch(authSuccess({ name, email, uid: userId }));
         dispatch(updateName(name));
         dispatch(updateEmail(email));
 
@@ -127,10 +127,10 @@ export default function RegisterForm() {
   }, 300);
   return (
     <>
-      <div className="flex flex-col items-center relative bottom-20 xxs:bottom-28 xs:bottom-36 s:bottom-44 sm:bottom-52 md:bottom-64 mx-auto s:px-5 md:h-screen lg:py-0">
-        <div className="w-full rounded-lg shadow-md border md:mt-0 sm:max-w-lg xl:p-0 bg-gray-900 border-gray-700">
-          <div className="p-5 space-y-4 sm:p-8">
-            <h1 className="text-2xl text-center font-bold tracking-tight md:text-2xl text-gray-300">
+      <div className="flex flex-col items-center relative bottom-20 smallMobile:bottom-28 mobile:bottom-36 small:bottom-44 medium:bottom-52 tablet:bottom-64 mx-auto small:px-5 tablet:h-screen desktop:py-0">
+        <div className="w-full rounded-lg shadow-md border md:mt-0 medium:max-w-lg largeDesktop:p-0 bg-gray-900 border-gray-700">
+          <div className="p-5 space-y-4 medium:p-8">
+            <h1 className="text-2xl text-center font-bold tracking-tight tablet:text-2xl text-gray-300">
               Create an Account
             </h1>
             <form className="space-y-4" action="#" onSubmit={handleSubmit}>

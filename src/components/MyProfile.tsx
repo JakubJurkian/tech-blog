@@ -9,7 +9,7 @@ import { db, storage } from '../firebase';
 import { RootState } from '../store/store';
 import { updateAvatar } from '../store/profileSlice';
 
-import guestUser from '/guest-user.png';
+import guestUser from '/guest-user.webp';
 
 const MyProfilePage: React.FC = () => {
   const [transition] = useAutoAnimate();
@@ -40,7 +40,6 @@ const MyProfilePage: React.FC = () => {
   }, [uid, dispatch]);
 
   const { name, email } = useSelector((state: RootState) => state.profile);
-  console.log(name, email);
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -98,7 +97,7 @@ const MyProfilePage: React.FC = () => {
   if (isLoading) {
     content = (
       <div role="status" className="animate-pulse">
-        <div className="flex items-center justify-center h-56 lg:h-[476px] my-2 rounded-3xl bg-gray-700">
+        <div className="flex items-center justify-center h-56 desktop:h-[476px] my-2 rounded-3xl bg-gray-700">
           <svg
             className="w-12 text-gray-600"
             xmlns="http://www.w3.org/2000/svg"
@@ -133,13 +132,13 @@ const MyProfilePage: React.FC = () => {
           className="rounded-md border-2 mx-4 file:bg-blue-500 file:rounded-e-md file:mr-3 file:p-1 file:cursor-pointer file:border-none file:hover:bg-blue-400 file:smooth-transition-effect"
         />
         <button
-          className="bg-blue-500 hover:bg-blue-400 my-4 w-3/4 xs:w-10/12 p-1 text-lg rounded-md disabled:bg-gray-500 disabled:cursor-not-allowed smooth-transition-effect"
+          className="bg-blue-500 hover:bg-blue-400 my-4 w-3/4 mobile:w-10/12 p-1 text-lg rounded-md disabled:bg-gray-500 disabled:cursor-not-allowed smooth-transition-effect"
           disabled={percentage !== null && percentage < 100}
         >
           {avatarUrl ? 'Change image' : 'Upload Image'}
         </button>
       </form>
-      <div className="sm:flex gap-8">
+      <div className="medium:flex gap-8">
         <div className="w-56" ref={transition}>
           {content}
         </div>

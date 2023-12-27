@@ -14,7 +14,7 @@ function PostPage() {
   }, 300);
 
   return (
-    <div className="flex justify-center relative bottom-20 xxs:bottom-24 xs:bottom-32 s:bottom-40 sm:bottom-48 md:bottom-56">
+    <div className="flex justify-center relative bottom-20 smallMobile:bottom-24 mobile:bottom-32 small:bottom-40 medium:bottom-48 tablet:bottom-56">
       <Post
         author={post[0].author}
         addedXAgo={post[0].addedXAgo}

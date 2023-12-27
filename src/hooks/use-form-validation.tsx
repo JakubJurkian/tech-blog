@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 const useFormValidation = (validateValueFn: (value: string) => boolean) => {
-  const [enteredValue, setEnteredValue] = useState("");
+  const [enteredValue, setEnteredValue] = useState('');
   const [isTouched, setIsTouched] = useState(false);
 
   const valueIsValid = validateValueFn(enteredValue);
@@ -16,7 +16,7 @@ const useFormValidation = (validateValueFn: (value: string) => boolean) => {
   };
 
   const reset = () => {
-    setEnteredValue("");
+    setEnteredValue('');
     setIsTouched(false);
   };
 

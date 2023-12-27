@@ -54,22 +54,23 @@ const NewPost = () => {
     }
   };
 
-  
-
   return (
-    <div className="flex flex-col items-center relative bottom-16 xxs:bottom-20 xs:bottom-28 s:bottom-36 sm:bottom-48 md:bottom-60 mx-auto px-3 md:h-screen lg:py-0">
-      <div className="bg-gray-900 p-6 rounded-lg shadow-lg w-full xs:w-[430px] sm:w-[600px]">
-        <h1 className='text-2xl text-center'>Create a new post</h1>
+    <div className="flex flex-col items-center relative bottom-16 smallMobile:bottom-20 mobile:bottom-28 small:bottom-36 medium:bottom-48 tablet:bottom-60 mx-auto px-3 tablet:h-screen desktop:py-0">
+      <div className="bg-gray-900 p-6 rounded-lg shadow-lg w-full mobile:w-[430px] medium:w-[600px]">
+        <h1 className="text-2xl text-center">Create a new post</h1>
         <form className="flex flex-col" onSubmit={handleSubmit}>
-            <label htmlFor="" className="form-label">
-              Text
-            </label>
-            <TextEditor placeholder="Write Something..." ref={textRef}/>
+          <div className="form-label">
+            Text
+          </div>
+          <TextEditor placeholder="Write Something..." ref={textRef} />
           <label htmlFor="title" className="form-label">
             Title
           </label>
           <input type="text" id="title" className="form-input" ref={titleRef} />
-          <label htmlFor="image" className="form-label smooth-transition-effect">
+          <label
+            htmlFor="image"
+            className="form-label smooth-transition-effect"
+          >
             ImageURL
           </label>
           <input
@@ -94,8 +95,6 @@ const NewPost = () => {
           </button>
         </form>
       </div>
-      
-      
     </div>
   );
 };

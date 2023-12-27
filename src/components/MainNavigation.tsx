@@ -26,13 +26,13 @@ function App() {
               />
             </NavLink>
           </div>
-          <div className="hidden md:block">
+          <div className="hidden tablet:block">
             <Menu onClickedElement={isElementClicked} />
           </div>
           <button
             type="button"
             aria-label="menu"
-            className="md:hidden bg-gray-900 p-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white transition duration-150 ease-in-out"
+            className="tablet:hidden bg-gray-900 p-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white transition duration-150 ease-in-out"
             onClick={() => setShowMobileMenu(!showMobileMenu)}
           >
             <svg
@@ -50,7 +50,7 @@ function App() {
             </svg>
           </button>
         </div>
-        <div className="md:hidden" ref={transition}>
+        <div className="tablet:hidden" ref={transition}>
           {showMobileMenu && <Menu onClickedElement={isElementClicked} />}
         </div>
       </nav>

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface Post {
+export interface Post {
   id: string;
   author: string;
   date: string;

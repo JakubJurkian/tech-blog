@@ -4,31 +4,36 @@ import { NavLink } from 'react-router-dom';
 import { RootState } from '../store/store';
 import { authLogout } from '../store/authSlice';
 import { updateEmail, updateName } from '../store/profileSlice';
+import { signOut } from 'firebase/auth';
+import { auth } from '../firebase';
 
 const Menu = (props: { onClickedElement(arg: boolean): void }) => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const email = useSelector((state: RootState) => state.profile.email);
-
   function clickHandler() {
     props.onClickedElement(true);
   }
 
   function logoutHandler() {
     props.onClickedElement(true);
-    dispatch(authLogout());
-    dispatch(updateName(''));
-    dispatch(updateEmail(''));
+    signOut(auth)
+      .then(() => {
+        dispatch(authLogout());
+        dispatch(updateName(''));
+        dispatch(updateEmail(''));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   const notLogged = (
-    <>
-      <li>
-        <NavLink to="/register" className="menu-el" onClick={clickHandler}>
-          Sign Up
-        </NavLink>
-      </li>
-    </>
+    <li>
+      <NavLink to="/register" className="menu-el" onClick={clickHandler}>
+        Sign Up
+      </NavLink>
+    </li>
   );
 
   const logged = (
@@ -58,7 +63,7 @@ const Menu = (props: { onClickedElement(arg: boolean): void }) => {
   );
 
   return (
-    <ul className="py-2 space-y-3 font-medium text-slate-700 md:flex md:space-y-0 md:space-x-2">
+    <ul className="py-2 space-y-3 font-medium text-slate-700 tablet:flex tablet:space-y-0 tablet:space-x-2">
       {isLoggedIn && logged}
       {!isLoggedIn && notLogged}
     </ul>

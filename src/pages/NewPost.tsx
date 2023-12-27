@@ -14,11 +14,7 @@ function NewPostPage() {
     if (!isLoggedIn || email !== 'test@test.com') navigate('/');
   }, [isLoggedIn, email, navigate]);
 
-  return (
-    <>
-      <NewPost />
-    </>
-  );
+  return <NewPost />;
 }
 
 export default NewPostPage;

@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface ProfileState {
   name: string;
-  email: string;
+  email: string | null;
   avatarUrl: string;
 }
 
@@ -19,7 +19,7 @@ const profileSlice = createSlice({
     updateName: (state, action: PayloadAction<string>) => {
       state.name = action.payload;
     },
-    updateEmail: (state, action: PayloadAction<string>) => {
+    updateEmail: (state, action: PayloadAction<string | null>) => {
       state.email = action.payload;
     },
     updateAvatar: (state, action: PayloadAction<string>) => {
