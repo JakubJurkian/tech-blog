@@ -74,7 +74,7 @@ function HomePage() {
         githubLink={authorInfo[3]}
       />
       <div className="relative bottom-12 smallMobile:bottom-14 mobile:bottom-20 medium:bottom-28">
-        <main className="max-w-3xl mx-2 tablet:m-auto desktop:max-w-4xl">
+        <div className="max-w-3xl mx-2 tablet:m-auto desktop:max-w-4xl">
           <section>
             <div className="flex justify-between">
               <code>Posts</code>
@@ -86,7 +86,7 @@ function HomePage() {
             />
           </section>
           <div ref={transition}>{content}</div>
-        </main>
+        </div>
       </div>
     </div>
   );

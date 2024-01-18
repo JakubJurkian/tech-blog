@@ -8,9 +8,9 @@ const RootLayout = () => {
   const [transition] = useAutoAnimate();
   return (
     <>
-      <div className="relative">
-        <BackgroundImg />
+      <div>
         <MainNavigation />
+        <BackgroundImg />
       </div>
       <main ref={transition}>
         <Outlet />

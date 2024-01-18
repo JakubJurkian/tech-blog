@@ -5,7 +5,7 @@ function AuthorCard(props: {
   githubLink: string;
 }) {
   return (
-    <div className="bg-gray-900 flex flex-col p-3 mx-2 rounded-xl shadow-md max-w-lg relative bottom-16 smallMobile:bottom-20 mobile:flex-row mobile:p-4 mobile:bottom-28 small:m-auto medium:bottom-36 medium:px-6 tablet:w-4/5 desktop:max-w-xl">
+    <div className="bg-gray-900 flex flex-col p-3 mx-2 rounded-xl shadow-md max-w-lg mobile:flex-row relative bottom-16 smallMobile:bottom-20 mobile:bottom-28 medium:bottom-36 mobile:p-4 small:m-auto medium:px-6 tablet:w-4/5 desktop:max-w-xl">
       <img
         src={props.src}
         alt="author"

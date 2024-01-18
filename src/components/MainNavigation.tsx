@@ -14,7 +14,7 @@ function App() {
   }
 
   return (
-    <header className={`${classes['nav-bg']} fixed top-0 w-full z-10`}>
+    <header className={`${classes['nav-bg']} fixed w-full z-10`}>
       <nav className="shadow-lg">
         <div className="max-w-7xl mx-auto flex items-center justify-between h-16 px-4">
           <div>
